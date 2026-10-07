@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { usePublishedContent } from "@/hooks/use-content";
 import { youtubeId, type Article, type GalleryImage, type Video } from "@/lib/content";
 import { jsonLd, siteUrl } from "@/lib/seo";
-import { PageBanner, ContactStrip } from "./dlfly-site";
+import { PageBanner, ContactStrip, SectionLabel } from "./dlfly-site";
 import { Reveal } from "./reveal";
 
 export function ArticleCards({ articles }: { articles: Article[] }) {
@@ -53,7 +53,7 @@ export function ArticlesPage({ initial }: { initial: Article[] }) {
         title="Practical guidance for your next chapter."
         description="Explore articles on study planning, visa preparation, residency orientation and education finance."
       />
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-6">
+      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-6">
         {error && (
           <p role="status" className="mb-6 text-sm text-muted-foreground">
             {error}
@@ -138,7 +138,7 @@ export function GalleryPage({ initial }: { initial: GalleryImage[] }) {
         title="A closer look at the journey."
         description="Explore images shared by DLFLY Overseas, from education planning to the preparation behind your next step."
       />
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-6">
+      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-6">
         {error && (
           <p role="status" className="mb-6 text-sm text-muted-foreground">
             {error}
@@ -205,6 +205,7 @@ function VideoEmbed({ video }: { video: Video }) {
         ) : (
           <button
             disabled={!ready}
+            data-video-id={id}
             onClick={() => setPlaying(true)}
             className="group relative grid size-full place-items-center overflow-hidden text-white"
             aria-label={`Play video: ${video.title}`}
@@ -238,7 +239,7 @@ export function VideosPage({ initial }: { initial: Video[] }) {
         title="Watch. Understand. Plan your next step."
         description="Watch videos selected by our team to support your education and preparation journey. Choose a video to load its YouTube player."
       />
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-6">
+      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-6">
         {error && (
           <p role="status" className="mb-6 text-sm text-muted-foreground">
             {error}
@@ -250,17 +251,59 @@ export function VideosPage({ initial }: { initial: Video[] }) {
           ))}
         </div>
         {!items.length && (
-          <div className="rounded-xl border border-border bg-card p-10 text-center">
+          <div>
+            <SectionLabel>Keep exploring</SectionLabel>
             <h2 className="font-display text-2xl font-extrabold">
-              Our video library is coming soon.
+              Start with the topics that matter to you.
             </h2>
-            <p className="mt-4 text-sm leading-7 text-muted-foreground">
-              For now, speak with an advisor about your study, visa, residency or education finance
-              questions.
+            <p className="mt-3 text-sm leading-7 text-muted-foreground">
+              Our video library is being prepared. Explore these practical guides while new videos
+              are added.
             </p>
-            <Link to="/contact" className="mt-5 inline-flex font-bold text-primary">
-              Contact our team →
-            </Link>
+            <div className="mt-6 grid gap-5 md:grid-cols-3">
+              {[
+                {
+                  to: "/study-abroad",
+                  title: "Your study abroad plan",
+                  image: "/images/dlfly-study.jpg",
+                  text: "Discover the steps from course shortlisting to preparing for campus life.",
+                },
+                {
+                  to: "/visa",
+                  title: "Your visa preparation",
+                  image: "/images/dlfly-visa.jpg",
+                  text: "Understand how to organise documents, deadlines and your next questions.",
+                },
+                {
+                  to: "/education-loans",
+                  title: "Your education budget",
+                  image: "/images/dlfly-finance.jpg",
+                  text: "Prepare a useful overview of tuition, living costs and funding timelines.",
+                },
+              ].map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to as "/study-abroad" | "/visa" | "/education-loans"}
+                  className="overflow-hidden rounded-2xl border border-border bg-card"
+                >
+                  <img
+                    src={item.image}
+                    alt=""
+                    width={600}
+                    height={400}
+                    loading="lazy"
+                    className="aspect-[16/10] w-full object-cover"
+                  />
+                  <div className="p-5">
+                    <h3 className="font-display text-lg font-extrabold">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-muted-foreground">{item.text}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                      Explore the guide <ArrowRight className="size-4" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         )}
       </section>

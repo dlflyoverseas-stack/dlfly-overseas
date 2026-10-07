@@ -30,7 +30,9 @@ function PrivacyPage() {
         <p>
           When configured, Google Analytics 4 and Microsoft Clarity help us understand how visitors
           use public pages. These scripts load only after you allow analytics. Admin pages do not
-          initialise analytics. Use “Cookie preferences” in the footer to change your choice.
+          initialise analytics. Public page views and contact-button clicks help us understand which
+          guidance visitors use. Page-view URLs omit query strings and fragments. Use “Cookie
+          preferences” in the footer to change your choice.
         </p>
         <h2>Maps and videos</h2>
         <p>

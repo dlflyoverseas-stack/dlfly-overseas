@@ -1,6 +1,6 @@
 # DLFLY Overseas
 
-React and TanStack Start website for study abroad, visa guidance, permanent residency orientation and education finance. Service pages include preparation steps, checklists and FAQs. The original hero layout is preserved; the Framer Motion mobile menu overlays it. Articles, gallery images, YouTube videos and site settings are managed through Firebase at `/admin`.
+React and TanStack Start website for study abroad, visa guidance, permanent residency orientation and education finance. Service pages include preparation steps, checklists and FAQs. The image-rich interface uses a light hero, rounded cards and red calls to action. Hero dimensions and its position in the page flow are preserved; the Framer Motion mobile menu overlays it. Articles, gallery images, YouTube videos and site settings are managed through Firebase at `/admin`.
 
 Enquiries: +91 6304636998 and dlflyoverseas@gmail.com. The footer credits [Octaleads](https://www.octaleads.com).
 
@@ -36,9 +36,11 @@ Videos accept a YouTube URL or video ID. Public players use `youtube-nocookie.co
 
 Set `VITE_SITE_URL` to the actual production origin before building. Canonical links, social metadata, Organization/Article structured data, `/sitemap.xml` and `/robots.txt` use this origin. The sitemap includes published articles and excludes admin pages.
 
-The business integrations are GA4 `G-HZXF3MF7CH` and Microsoft Clarity `yu0nizh9b1`. Configure these through environment variables or admin Settings. Analytics load only after visitor consent; the footer reopens preferences. Keep GA4 enhanced measurement page views and browser-history tracking enabled to record client-side navigation.
+The business integrations are GA4 `G-HZXF3MF7CH` and Microsoft Clarity `yu0nizh9b1`. Configure these through environment variables or admin Settings. Analytics load only after visitor consent; the footer reopens preferences. The site sends one explicit `page_view` per public route with `send_page_view: false` in its Google configuration. **Disable enhanced measurement → Page views → Page changes based on browser history events** to prevent duplicate views. Scrolls, outbound clicks and downloads may remain enabled. The site also sends `contact_click` with a `contact_method` of `whatsapp`, `phone` or `email`, and `video_start` when a visitor opens a YouTube player. It does not treat a contact click as a completed enquiry. Page-view URLs and referrers omit query strings and fragments. Google advertising consent remains denied. Clarity uses Consent V2 and balanced masking.
 
-For Search Console, create a URL-prefix property for the actual production URL, copy its HTML-tag verification value into `VITE_GOOGLE_SITE_VERIFICATION` before a rebuild or into admin Settings, verify ownership, then submit `sitemap.xml`. Tracking IDs in code do not by themselves confirm live collection or ownership verification.
+The primary domain is `https://dlflyoverseas.com`. Cloudflare routes both `@` and `www` to the Vercel-provided CNAME target with DNS-only routing; Vercel permanently redirects `www` to the apex. Zoho email DNS records are preserved. The Search Console Domain property is verified through its Cloudflare TXT record. Keep that verification record, then submit `https://dlflyoverseas.com/sitemap.xml`. The prior Vercel URL-prefix property retains its HTML verification tag. Tracking IDs in code do not by themselves confirm live collection. See [Google’s page-view documentation](https://developers.google.com/analytics/devguides/collection/ga4/views) and [Microsoft’s Consent V2 documentation](https://learn.microsoft.com/en-gb/clarity/setup-and-installation/clarity-consent-api-v2).
+
+The contact page currently uses phone, email and WhatsApp. Zoho Forms embedding is deferred until a public form URL is supplied.
 
 ## Validation
 

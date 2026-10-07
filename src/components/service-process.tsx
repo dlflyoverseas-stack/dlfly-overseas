@@ -7,7 +7,7 @@ export function ServiceProcess({ service }: { service: keyof typeof serviceDetai
   return (
     <>
       <section className="bg-secondary/50">
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6">
+        <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6">
           <Reveal>
             <p className="text-xs font-bold uppercase tracking-widest text-primary">
               Your process, step by step
@@ -19,7 +19,7 @@ export function ServiceProcess({ service }: { service: keyof typeof serviceDetai
               {detail.introduction}
             </p>
           </Reveal>
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-7 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {detail.process.map(([title, text], index) => (
               <Reveal
                 key={title}
@@ -36,7 +36,7 @@ export function ServiceProcess({ service }: { service: keyof typeof serviceDetai
           </div>
         </div>
       </section>
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-6 lg:grid-cols-2">
+      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-12 sm:px-6 lg:grid-cols-2">
         <Reveal>
           <p className="text-xs font-bold uppercase tracking-widest text-primary">
             Prepare for your conversation

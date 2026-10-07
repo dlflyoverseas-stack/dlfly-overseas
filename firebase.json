@@ -4,7 +4,7 @@
       "googleSignIn": {
         "oAuthBrandDisplayName": "DLFLY Overseas",
         "supportEmail": "dlflyoverseas@gmail.com",
-        "authorizedRedirectUris": ["https://dlflyoverseas.vercel.app"]
+        "authorizedRedirectUris": ["https://dlflyoverseas.com", "https://dlflyoverseas.vercel.app"]
       }
     }
   },

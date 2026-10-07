@@ -103,3 +103,56 @@ test("business analytics respect consent and exclude administration", async ({ p
   ).toBeEnabled();
   await expect(page.locator("#dlfly-ga4, #dlfly-clarity")).toHaveCount(0);
 });
+
+test("analytics send one page view per route and classify contact clicks", async ({ page }) => {
+  await page.route("https://www.googletagmanager.com/gtag/js**", (route) =>
+    route.fulfill({ contentType: "application/javascript", body: "" }),
+  );
+  await page.route("https://www.clarity.ms/tag/**", (route) =>
+    route.fulfill({ contentType: "application/javascript", body: "" }),
+  );
+  await page.goto("/?email=private-test@example.com#private-fragment");
+  await page.getByRole("button", { name: "Allow analytics", exact: true }).click();
+  const pageViews = () =>
+    page.evaluate(() =>
+      (window.dataLayer ?? [])
+        .map((item) => Array.from(item as IArguments))
+        .filter((item) => item[0] === "event" && item[1] === "page_view"),
+    );
+  await expect.poll(async () => (await pageViews()).length).toBe(1);
+  const first = await pageViews();
+  expect(first[0]?.[2]).toMatchObject({ page_location: "http://127.0.0.1:4178/" });
+  expect(await page.evaluate(() => Object.prototype.toString.call(window.dataLayer?.[0]))).toBe(
+    "[object Arguments]",
+  );
+  await page.locator('main a[href="/articles"]').first().click();
+  await expect(page).toHaveURL(/\/articles$/);
+  await expect.poll(async () => (await pageViews()).length).toBe(2);
+  await page.evaluate(() =>
+    document.addEventListener("click", (event) => {
+      if (event.target instanceof Element && event.target.closest('a[href^="https://wa.me/"]'))
+        event.preventDefault();
+    }),
+  );
+  await page
+    .getByRole("link", { name: "Chat with DLFLY Overseas on WhatsApp", exact: true })
+    .click();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          (window.dataLayer ?? [])
+            .map((item) => Array.from(item as IArguments))
+            .filter((item) => item[1] === "contact_click").length,
+      ),
+    )
+    .toBe(1);
+  expect(
+    await page.evaluate(
+      () =>
+        (window.dataLayer ?? [])
+          .map((item) => Array.from(item as IArguments))
+          .find((item) => item[1] === "contact_click")?.[2],
+    ),
+  ).toMatchObject({ contact_method: "whatsapp", page_path: "/articles" });
+});

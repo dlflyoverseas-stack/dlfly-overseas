@@ -1,7 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import {
-  ArrowDownRight,
   ArrowRight,
   ArrowUpRight,
   BadgeCheck,
@@ -15,6 +14,8 @@ import {
   Compass,
   GraduationCap,
   Menu,
+  Mail,
+  MessageCircle,
   Phone,
   Plane,
   ShieldCheck,
@@ -61,16 +62,16 @@ export function SiteHeader() {
   }, [menuOpen]);
   return (
     <>
-      <div className="hidden bg-primary text-primary-foreground sm:block">
+      <div className="hidden bg-secondary text-foreground sm:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-xs">
-          <span>Your next chapter starts here.</span>
+          <span>Your next chapter, with a clearer plan.</span>
           <a className="inline-flex items-center gap-2" href={telephoneLink}>
             <Phone className="size-3.5" aria-hidden="true" />
             Speak with an advisor <span className="font-semibold">{phoneNumber}</span>
           </a>
         </div>
       </div>
-      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-border bg-white/95 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-6">
           <Link
             to="/"
@@ -80,7 +81,7 @@ export function SiteHeader() {
           >
             <SiteBrand />
           </Link>
-          <nav className="hidden items-center gap-7 xl:flex" aria-label="Main navigation">
+          <nav className="hidden items-center gap-5 xl:flex" aria-label="Main navigation">
             <Link to="/" activeOptions={{ exact: true }} className="nav-link">
               Home
             </Link>
@@ -89,7 +90,7 @@ export function SiteHeader() {
                 Our services{" "}
                 <ChevronDown className="size-3.5 transition-transform group-hover:rotate-180" />
               </Link>
-              <div className="invisible absolute left-0 top-full w-64 translate-y-2 border border-border bg-background p-2 opacity-0 shadow-xl transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              <div className="invisible absolute left-0 top-full w-64 translate-y-2 rounded-2xl border border-border bg-background p-2 opacity-0 shadow-xl transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
                 {serviceLinks.map(({ to, title, icon: Icon }) => (
                   <Link key={to} to={to} className="menu-link">
                     <Icon className="size-4 text-primary" /> {title}
@@ -117,7 +118,7 @@ export function SiteHeader() {
             <a href={telephoneLink} className="text-sm font-semibold text-foreground">
               {phoneNumber}
             </a>
-            <Button asChild className="rounded-sm px-5">
+            <Button asChild className="rounded-full px-5">
               <a href={whatsappLink} target="_blank" rel="noreferrer">
                 Free consultation <ArrowUpRight />
               </a>
@@ -128,7 +129,7 @@ export function SiteHeader() {
               asChild
               variant="outline"
               size="icon"
-              className="rounded-sm"
+              className="rounded-full"
               aria-label="Call DLFLY Overseas"
             >
               <a href={telephoneLink}>
@@ -138,7 +139,7 @@ export function SiteHeader() {
             <Button
               variant="outline"
               size="icon"
-              className="rounded-sm"
+              className="rounded-full"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
               aria-controls="mobile-navigation"
@@ -233,7 +234,7 @@ export function SiteFooter() {
   const [ready, setReady] = useState(false);
   useEffect(() => setReady(true), []);
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-[#19191c] text-primary-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr] md:py-16">
         <div>
           <Link to="/" className="inline-flex items-center gap-3" aria-label="DLFLY Overseas home">
@@ -276,7 +277,7 @@ export function SiteFooter() {
           <p className="mt-2 text-sm text-primary-foreground/70">
             Call us to start a conversation.
           </p>
-          <Button asChild variant="secondary" className="mt-5 rounded-sm">
+          <Button asChild variant="secondary" className="mt-5 rounded-full">
             <a href={whatsappLink} target="_blank" rel="noreferrer">
               Message our team <ArrowUpRight />
             </a>
@@ -349,30 +350,37 @@ export function PageBanner({
   imageAlt?: string;
 }) {
   return (
-    <section className="relative isolate overflow-hidden bg-primary text-primary-foreground">
-      <img
-        src={image}
-        alt={imageAlt}
-        width={1536}
-        height={1024}
-        className="absolute inset-0 -z-20 size-full object-cover object-center"
-      />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/35" />
-      <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-6 sm:py-20 lg:py-24">
-        <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground/70">
-          {eyebrow}
-        </p>
-        <h1 className="max-w-4xl font-display text-4xl font-extrabold leading-tight sm:text-5xl">
-          {title}
-        </h1>
-        <p className="mt-5 max-w-2xl text-base leading-7 text-primary-foreground/80 sm:text-lg">
-          {description}
-        </p>
-        <Button asChild variant="secondary" className="mt-8 rounded-sm">
-          <a href={whatsappLink} target="_blank" rel="noreferrer">
-            Talk to an advisor <ArrowUpRight />
-          </a>
-        </Button>
+    <section className="border-b border-border bg-secondary/50">
+      <div className="mx-auto grid max-w-7xl items-center gap-7 px-5 py-9 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-12">
+        <div>
+          <p className="mb-4 inline-flex rounded-full border border-primary/20 bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary">
+            {eyebrow}
+          </p>
+          <h1 className="max-w-3xl font-display text-3xl font-extrabold leading-tight text-foreground sm:text-4xl lg:text-5xl">
+            {title}
+          </h1>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">{description}</p>
+          <Button asChild className="mt-6 rounded-full px-6">
+            <a href={whatsappLink} target="_blank" rel="noreferrer">
+              Talk to an advisor <ArrowUpRight />
+            </a>
+          </Button>
+        </div>
+        <div className="relative overflow-hidden rounded-3xl">
+          <img
+            src={image}
+            alt={imageAlt}
+            width={1536}
+            height={1024}
+            className="aspect-[16/10] w-full object-cover"
+          />
+          <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 rounded-2xl bg-white/95 p-4 text-sm font-semibold backdrop-blur">
+            <span className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-primary">
+              <GraduationCap className="size-5" />
+            </span>
+            Your ambitions. Our guidance. A practical plan.
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -485,14 +493,14 @@ export function ServicePage({ service }: { service: ServiceKey }) {
         image={serviceImages[service].src}
         imageAlt={serviceImages[service].alt}
       />
-      <section className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
+      <section className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-6 sm:py-14 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
         <div>
           <SectionLabel>Your journey, your way</SectionLabel>
           <h2 className="font-display text-3xl font-extrabold leading-tight text-foreground sm:text-4xl">
             The right support makes every next step clearer.
           </h2>
           <p className="mt-5 text-base leading-7 text-muted-foreground">{item.intro}</p>
-          <Button asChild className="mt-7 rounded-sm">
+          <Button asChild className="mt-7 rounded-full">
             <a href={whatsappLink} target="_blank" rel="noreferrer">
               Discuss your plans <ArrowRight />
             </a>
@@ -504,11 +512,11 @@ export function ServicePage({ service }: { service: ServiceKey }) {
           loading="lazy"
           width={1536}
           height={1024}
-          className="aspect-[4/3] w-full object-cover"
+          className="aspect-[4/3] w-full rounded-3xl object-cover"
         />
       </section>
-      <section className="mx-auto grid max-w-7xl gap-8 px-5 pb-14 sm:px-6 sm:pb-20 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="border-t-2 border-accent bg-card px-6 py-7 sm:px-8">
+      <section className="mx-auto grid max-w-7xl gap-8 px-5 pb-12 sm:px-6 sm:pb-14 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="rounded-2xl border border-border bg-card px-6 py-7 sm:px-8">
           <div className="mb-5 flex items-center gap-3">
             <span className="grid size-11 place-items-center bg-secondary text-primary">
               <Icon className="size-5" />
@@ -527,6 +535,28 @@ export function ServicePage({ service }: { service: ServiceKey }) {
             ))}
           </ul>
         </div>
+        <div className="rounded-2xl bg-secondary/60 p-6 sm:p-8">
+          <SectionLabel>Turn your plans into next steps</SectionLabel>
+          <h2 className="font-display text-2xl font-extrabold">
+            A clear starting point for your journey.
+          </h2>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            {item.steps.map((step, index) => (
+              <div key={step} className="flex items-start gap-3 rounded-xl bg-white p-4">
+                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-primary text-xs font-bold text-white">
+                  {index + 1}
+                </span>
+                <p className="text-sm leading-6">{step}</p>
+              </div>
+            ))}
+          </div>
+          <Link
+            to="/contact"
+            className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary"
+          >
+            Build your preparation plan <ArrowRight className="size-4" />
+          </Link>
+        </div>
       </section>
       <ServiceProcess service={service} />
       {service === "residency" && (
@@ -543,7 +573,7 @@ export function ServicePage({ service }: { service: ServiceKey }) {
 
 export function ContactStrip() {
   return (
-    <section className="bg-accent text-accent-foreground">
+    <section className="bg-primary text-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-9 sm:px-6 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.17em]">
@@ -553,7 +583,7 @@ export function ContactStrip() {
             Let’s make your next step count.
           </h2>
         </div>
-        <Button asChild variant="default" className="w-fit rounded-sm">
+        <Button asChild variant="secondary" className="w-fit rounded-full">
           <a href={telephoneLink}>
             <Phone /> Call {phoneNumber} <ArrowUpRight />
           </a>
@@ -568,69 +598,94 @@ export function ContactPage() {
     <>
       <PageBanner
         eyebrow="Contact DLFLY Overseas"
-        title="Tell us where you’d like to go."
-        description="Start with a conversation. Our team can help you understand what to consider for your study, visa, residency or education finance plans."
+        title="Your next chapter starts with a conversation."
+        description="Tell us about your goals. We’ll help you understand your options and prepare a practical plan for study, visa, residency or education finance."
         image={visaImage}
         imageAlt="Student and advisor discussing overseas study plans"
       />
-      <section className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 sm:py-20 md:grid-cols-[1fr_0.8fr]">
-        <div>
-          <SectionLabel>We’re here to help</SectionLabel>
-          <h2 className="font-display text-3xl font-extrabold">
-            One conversation can help you find your next step.
-          </h2>
-          <p className="mt-4 max-w-xl text-base leading-7 text-muted-foreground">
-            Call or message us to share a little about your goals. We’ll help you work out what
-            information to gather and where to begin.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild className="rounded-sm">
-              <a href={telephoneLink}>
-                <Phone /> Call us
-              </a>
-            </Button>
-            <Button asChild variant="outline" className="rounded-sm">
-              <a href={whatsappLink} target="_blank" rel="noreferrer">
-                WhatsApp us <ArrowUpRight />
-              </a>
-            </Button>
+      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-6">
+        <div className="grid overflow-hidden rounded-3xl border border-border bg-card lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="relative min-h-[300px] bg-secondary">
+            <img
+              src={studyImage}
+              alt="Students beginning their international university journey"
+              width={1536}
+              height={1024}
+              loading="lazy"
+              className="absolute inset-0 size-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+            <div className="absolute bottom-0 p-6 text-white sm:p-8">
+              <p className="text-xs font-bold uppercase tracking-widest">
+                Big dreams. Thoughtful guidance.
+              </p>
+              <h2 className="mt-3 font-display text-3xl font-extrabold">
+                Let’s find your way forward.
+              </h2>
+              <p className="mt-3 max-w-sm text-sm leading-6 text-white/85">
+                Course choices, documents, budgets and timelines — bring your questions, and we’ll
+                work through them together.
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="border-l-2 border-accent pl-6 sm:pl-8">
-          <SectionLabel>Reach our team</SectionLabel>
-          <a
-            href={telephoneLink}
-            className="inline-flex items-center gap-3 text-2xl font-extrabold text-foreground sm:text-3xl"
-          >
-            <Phone className="size-6 text-primary" />
-            {phoneNumber}
-          </a>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Call for a friendly first conversation.
-          </p>
-          <div className="mt-8 border-t border-border pt-6">
-            <h3 className="font-display font-bold">What can we help with?</h3>
-            <ul className="mt-4 grid gap-3 text-sm text-muted-foreground">
-              {serviceLinks.map(({ to, title }) => (
-                <li key={to}>
-                  <Link to={to} className="inline-flex items-center gap-2 hover:text-primary">
-                    {title} <ArrowRight className="size-3.5" />
-                  </Link>
-                </li>
+          <div className="p-6 sm:p-8 lg:p-10">
+            <SectionLabel>Connect with an advisor</SectionLabel>
+            <h2 className="font-display text-2xl font-extrabold sm:text-3xl">
+              What would you like to explore?
+            </h2>
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              {serviceLinks.map(({ to, title, icon: Icon }) => (
+                <Link
+                  key={to}
+                  to={to}
+                  className="flex items-center gap-3 rounded-xl border border-border p-3 text-sm font-semibold transition-colors hover:border-primary hover:bg-secondary"
+                >
+                  <Icon className="size-5 shrink-0 text-primary" />
+                  {title}
+                </Link>
               ))}
-            </ul>
+            </div>
+            <p className="mt-5 text-sm leading-7 text-muted-foreground">
+              Share your preferred destination, course or travel goal. Our team will help you
+              identify the information to gather and the next steps to consider.
+            </p>
+            <div className="mt-6 grid gap-3">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="flex min-h-12 items-center justify-between gap-3 rounded-full bg-primary px-5 py-3 text-sm font-bold text-white"
+              >
+                <span className="flex items-center gap-3">
+                  <MessageCircle className="size-5" />
+                  Start a WhatsApp conversation
+                </span>
+                <ArrowUpRight className="size-5" />
+              </a>
+              <a
+                href={telephoneLink}
+                className="flex min-h-12 items-center gap-3 rounded-full border border-border px-5 py-3 text-sm font-semibold"
+              >
+                <Phone className="size-5 text-primary" />
+                {phoneNumber}
+              </a>
+              <a
+                href="mailto:dlflyoverseas@gmail.com"
+                className="flex min-h-12 items-center gap-3 rounded-full border border-border px-5 py-3 text-sm font-semibold"
+              >
+                <Mail className="size-5 shrink-0 text-primary" />
+                <span className="break-all">dlflyoverseas@gmail.com</span>
+              </a>
+            </div>
+            <p className="mt-5 text-xs leading-6 text-muted-foreground">
+              Start with your goals and questions. Please avoid sending sensitive documents until
+              your advisor explains the appropriate process.
+            </p>
           </div>
         </div>
-        <img
-          src={studyImage}
-          alt="Students walking together on a university campus"
-          loading="lazy"
-          width={1536}
-          height={1024}
-          className="aspect-[16/7] w-full object-cover md:col-span-2"
-        />
       </section>
       <ContactLocation />
+      <ContactStrip />
     </>
   );
 }
@@ -662,7 +717,7 @@ export function AboutPage() {
         image={studyImage}
         imageAlt="Students walking through a university campus"
       />
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.1fr_0.9fr]">
+      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-12 sm:px-6 sm:py-14 md:grid-cols-[1.1fr_0.9fr]">
         <div>
           <SectionLabel>Who we are</SectionLabel>
           <h2 className="font-display text-3xl font-extrabold">
@@ -692,23 +747,38 @@ export function AboutPage() {
         </div>
       </section>
       <Reveal className="mx-auto max-w-7xl px-5 pb-16 sm:px-6">
-        <div className="rounded-xl bg-secondary/60 p-7 sm:p-10">
-          <SectionLabel>How we work</SectionLabel>
-          <h2 className="font-display text-3xl font-extrabold">
-            Listen. Organise. Prepare. Support.
-          </h2>
-          <p className="mt-5 max-w-3xl text-base leading-8 text-muted-foreground">
-            We start by understanding your ambitions and circumstances. Together, we organise the
-            research, documents and timelines that matter, explain the next steps clearly and help
-            you prepare for conversations with institutions, lenders and qualified professionals.
-            You stay involved in every decision.
-          </p>
-          <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
-            Our support covers study abroad planning, visa preparation, general residency
-            orientation and education finance organisation. Universities, immigration authorities
-            and lenders make their own decisions; we focus on careful preparation and clear
-            communication.
-          </p>
+        <div className="grid items-center gap-7 overflow-hidden rounded-3xl bg-secondary/60 p-6 sm:p-8 lg:grid-cols-2">
+          <div>
+            <SectionLabel>How we work</SectionLabel>
+            <h2 className="font-display text-3xl font-extrabold">
+              Listen. Organise. Prepare. Support.
+            </h2>
+            <p className="mt-5 max-w-3xl text-base leading-8 text-muted-foreground">
+              We start by understanding your ambitions and circumstances. Together, we organise the
+              research, documents and timelines that matter, explain the next steps clearly and help
+              you prepare for conversations with institutions, lenders and qualified professionals.
+              You stay involved in every decision.
+            </p>
+            <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
+              Our support covers study abroad planning, visa preparation, general residency
+              orientation and education finance organisation. Universities, immigration authorities
+              and lenders make their own decisions; we focus on careful preparation and clear
+              communication.
+            </p>
+            <Button asChild className="mt-6 rounded-full">
+              <Link to="/contact">
+                Meet your next step <ArrowRight />
+              </Link>
+            </Button>
+          </div>
+          <img
+            src={visaImage}
+            alt="An advisor and student organising a study plan"
+            width={1536}
+            height={1024}
+            loading="lazy"
+            className="aspect-[4/3] w-full rounded-2xl object-cover"
+          />
         </div>
       </Reveal>
       <ContactStrip />
@@ -805,7 +875,7 @@ export function HomePage() {
   return (
     <>
       <section
-        className="group/hero relative isolate min-h-[570px] overflow-hidden bg-primary sm:min-h-[600px]"
+        className="group/hero relative isolate min-h-[570px] overflow-hidden bg-secondary/50 sm:min-h-[600px]"
         aria-roledescription="carousel"
         aria-label="DLFLY Overseas highlights"
       >
@@ -816,22 +886,22 @@ export function HomePage() {
           fetchPriority="high"
           width={1536}
           height={1024}
-          className="absolute inset-0 -z-20 size-full object-cover object-center transition-opacity duration-700"
+          className="absolute inset-0 -z-20 size-full object-cover object-[65%_center] transition-opacity duration-700"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/95 via-primary/75 to-primary/10" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-white via-white/90 to-white/5 max-md:from-white/95 max-md:via-white/85 max-md:to-white/60" />
         <div className="mx-auto flex min-h-[570px] max-w-7xl items-center px-5 py-14 sm:min-h-[600px] sm:px-6">
-          <div className="max-w-[620px] text-primary-foreground">
-            <p className="mb-5 inline-flex items-center gap-2 border border-primary-foreground/40 px-3 py-2 text-xs font-bold uppercase tracking-[0.16em]">
+          <div className="max-w-[620px] text-foreground">
+            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.16em]">
               <Sparkles className="size-3.5" /> {currentSlide.eyebrow}
             </p>
             <h1 className="font-display text-4xl font-extrabold leading-[1.12] sm:text-6xl">
               {currentSlide.title}
             </h1>
-            <p className="mt-5 max-w-lg text-base leading-7 text-primary-foreground/85 sm:text-lg">
+            <p className="mt-5 max-w-lg text-base leading-7 text-muted-foreground sm:text-lg">
               {currentSlide.text}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild variant="secondary" size="lg" className="rounded-sm px-5">
+              <Button asChild variant="default" size="lg" className="rounded-full px-6">
                 <Link to={currentSlide.to}>
                   {currentSlide.action} <ArrowRight />
                 </Link>
@@ -840,14 +910,14 @@ export function HomePage() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="rounded-sm border-primary-foreground/60 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                className="rounded-full border-foreground/20 bg-white/80 text-foreground hover:bg-white"
               >
                 <a href={telephoneLink}>
                   <Phone /> Call our team
                 </a>
               </Button>
             </div>
-            <p className="mt-6 flex items-center gap-2 text-sm text-primary-foreground/80">
+            <p className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
               <BadgeCheck className="size-4" /> Study · Visa · Residency · Education finance
             </p>
           </div>
@@ -865,18 +935,18 @@ export function HomePage() {
               aria-label={`Show slide ${index + 1}: ${slide.eyebrow}`}
               aria-current={activeSlide === index ? "true" : undefined}
               onClick={() => setActiveSlide(index)}
-              className="size-3 min-w-3 rounded-full border-primary-foreground bg-primary-foreground/60 p-0 aria-[current=true]:w-8 aria-[current=true]:bg-accent"
+              className="size-3 min-w-3 rounded-full border-primary/50 bg-primary/20 p-0 aria-[current=true]:w-8 aria-[current=true]:bg-primary"
             />
           ))}
         </div>
-        <div className="absolute bottom-4 right-4 flex gap-2 sm:right-6">
+        <div className="absolute bottom-4 left-36 flex gap-2 sm:left-44">
           <Button
             type="button"
             variant="outline"
             size="icon"
             aria-label="Previous slide"
             onClick={() => setActiveSlide((index) => (index + slides.length - 1) % slides.length)}
-            className="rounded-full border-primary-foreground/70 bg-primary/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+            className="rounded-full border-border bg-white text-foreground hover:bg-secondary"
           >
             <ChevronLeft />
           </Button>
@@ -886,13 +956,10 @@ export function HomePage() {
             size="icon"
             aria-label="Next slide"
             onClick={() => setActiveSlide((index) => (index + 1) % slides.length)}
-            className="rounded-full border-primary-foreground/70 bg-primary/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+            className="rounded-full border-border bg-white text-foreground hover:bg-secondary"
           >
             <ChevronRight />
           </Button>
-        </div>
-        <div className="pointer-events-none absolute bottom-0 right-0 hidden items-center gap-2 bg-accent px-6 py-4 font-display text-xs font-extrabold uppercase tracking-[0.12em] text-accent-foreground md:flex">
-          <ArrowDownRight className="size-4" /> A future in motion
         </div>
       </section>
 
@@ -909,11 +976,11 @@ export function HomePage() {
               <div key={code} className="min-w-0">
                 <img
                   src={[campusImage, visaImage, residencyImage, studyImage][index]}
-                  alt={`${title} study destination`}
+                  alt="International education planning"
                   loading="lazy"
                   width={1536}
                   height={1024}
-                  className="mb-3 aspect-[5/3] w-full object-cover"
+                  className="mb-3 aspect-[5/3] w-full rounded-xl object-cover"
                 />
                 <span className="font-display text-lg font-extrabold text-primary">{code}</span>
                 <h3 className="mt-1 text-sm font-bold">{title}</h3>
@@ -924,7 +991,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-14 sm:px-6 sm:py-20">
+      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-6 sm:py-14">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <SectionLabel>Ways we can support you</SectionLabel>
@@ -939,12 +1006,12 @@ export function HomePage() {
             Talk to our team <ArrowRight className="size-4" />
           </Link>
         </div>
-        <div className="mt-9 grid border-t border-border sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map(({ icon: Icon, title, text, to }, index) => (
             <Link
               key={title}
               to={to}
-              className="group border-b border-border py-6 sm:px-5 sm:first:pl-0 lg:border-b-0 lg:border-r lg:px-5 lg:first:pl-0 lg:last:border-r-0"
+              className="group overflow-hidden rounded-2xl border border-border bg-card p-4 transition-all hover:-translate-y-1 hover:shadow-lg"
             >
               <img
                 src={[studyImage, visaImage, residencyImage, financeImage][index]}
@@ -952,17 +1019,17 @@ export function HomePage() {
                 loading="lazy"
                 width={1536}
                 height={1024}
-                className="aspect-[5/3] w-full object-cover"
+                className="aspect-[5/3] w-full rounded-xl object-cover"
               />
               <div className="mt-4 flex items-center justify-between">
-                <span className="grid size-12 place-items-center bg-secondary text-primary">
+                <span className="grid size-10 place-items-center rounded-full bg-secondary text-primary">
                   <Icon className="size-5" />
                 </span>
                 <span className="font-display text-sm font-bold text-muted-foreground">
                   0{index + 1}
                 </span>
               </div>
-              <h3 className="mt-5 font-display text-lg font-extrabold">{title}</h3>
+              <h3 className="mt-4 font-display text-lg font-extrabold">{title}</h3>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p>
               <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
                 Explore{" "}
@@ -974,7 +1041,7 @@ export function HomePage() {
       </section>
 
       <section className="bg-secondary/60">
-        <div className="mx-auto grid max-w-7xl gap-9 px-5 py-14 sm:px-6 sm:py-18 md:grid-cols-[0.85fr_1.15fr] md:items-center">
+        <div className="mx-auto grid max-w-7xl gap-9 px-5 py-12 sm:px-6 sm:py-14 md:grid-cols-[0.85fr_1.15fr] md:items-center">
           <div>
             <SectionLabel>A more considered journey</SectionLabel>
             <h2 className="font-display text-3xl font-extrabold leading-tight">
@@ -984,7 +1051,7 @@ export function HomePage() {
               Your goals are the starting point. We help connect the choices, paperwork and
               practical preparation that make an international study plan feel more within reach.
             </p>
-            <Button asChild className="mt-6 rounded-sm">
+            <Button asChild className="mt-6 rounded-full">
               <Link to="/about">
                 Get to know us <ArrowUpRight />
               </Link>
@@ -995,10 +1062,10 @@ export function HomePage() {
               loading="lazy"
               width={1536}
               height={1024}
-              className="mt-8 aspect-[16/9] w-full object-cover"
+              className="mt-6 aspect-[16/9] w-full rounded-2xl object-cover"
             />
           </div>
-          <div className="grid grid-cols-2 gap-px bg-border">
+          <div className="grid grid-cols-2 gap-4">
             {[
               {
                 icon: GraduationCap,
@@ -1021,7 +1088,10 @@ export function HomePage() {
                 text: "Take practical steps toward your next chapter.",
               },
             ].map(({ icon: Icon, title, text }) => (
-              <div key={title} className="bg-background p-5 sm:p-7">
+              <div
+                key={title}
+                className="rounded-2xl border border-border bg-background p-5 sm:p-7"
+              >
                 <Icon className="size-5 text-primary" />
                 <h3 className="mt-4 font-display font-extrabold">{title}</h3>
                 <p className="mt-2 text-sm leading-5 text-muted-foreground">{text}</p>
@@ -1054,13 +1124,29 @@ export function HomePage() {
             <Link
               key={item.to}
               to={item.to as "/articles" | "/gallery" | "/videos"}
-              className="rounded-xl border border-border bg-card p-6"
+              className="overflow-hidden rounded-2xl border border-border bg-card"
             >
-              <h3 className="font-display text-xl font-extrabold">{item.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.text}</p>
-              <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
-                Explore <ArrowRight className="size-4" />
-              </span>
+              <img
+                src={
+                  item.to === "/articles"
+                    ? financeImage
+                    : item.to === "/gallery"
+                      ? studyImage
+                      : visaImage
+                }
+                alt=""
+                width={600}
+                height={400}
+                loading="lazy"
+                className="aspect-[16/9] w-full object-cover"
+              />
+              <div className="p-5">
+                <h3 className="font-display text-xl font-extrabold">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.text}</p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                  Explore <ArrowRight className="size-4" />
+                </span>
+              </div>
             </Link>
           ))}
         </div>
