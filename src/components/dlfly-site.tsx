@@ -21,7 +21,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import campusImage from "@/assets/dlfly-campus.jpg";
-import campusImage from "@/assets/dlfly-campus.jpg";
 
 const phoneNumber = "+91 6304636998";
 const telephoneLink = "tel:+916304636998";
