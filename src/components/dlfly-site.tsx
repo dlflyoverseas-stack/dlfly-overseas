@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowDownRight,
@@ -9,6 +9,8 @@ import {
   BriefcaseBusiness,
   Check,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   CircleDollarSign,
   Compass,
   GraduationCap,
@@ -21,6 +23,10 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import campusImage from "@/assets/dlfly-campus.jpg";
+import studyImage from "@/assets/dlfly-study.jpg";
+import visaImage from "@/assets/dlfly-visa.jpg";
+import residencyImage from "@/assets/dlfly-residency.jpg";
+import financeImage from "@/assets/dlfly-finance.jpg";
 
 const phoneNumber = "+91 6304636998";
 const telephoneLink = "tel:+916304636998";
@@ -185,12 +191,12 @@ export function SectionLabel({ children }: { children: ReactNode }) {
   return <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.19em] text-primary">{children}</p>;
 }
 
-export function PageBanner({ eyebrow, title, description }: { eyebrow: string; title: string; description: string }) {
+export function PageBanner({ eyebrow, title, description, image = studyImage, imageAlt = "Students planning an international education journey" }: { eyebrow: string; title: string; description: string; image?: string; imageAlt?: string }) {
   return (
-    <section className="relative overflow-hidden bg-primary text-primary-foreground">
-      <div className="absolute -right-20 -top-40 size-[27rem] rounded-full border border-primary-foreground/10" aria-hidden="true" />
-      <div className="absolute -right-4 -top-24 size-[19rem] rounded-full border border-primary-foreground/10" aria-hidden="true" />
-      <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-6 sm:py-20">
+    <section className="relative isolate overflow-hidden bg-primary text-primary-foreground">
+      <img src={image} alt={imageAlt} width={1536} height={1024} className="absolute inset-0 -z-20 size-full object-cover object-center" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/35" />
+      <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-6 sm:py-20 lg:py-24">
         <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground/70">{eyebrow}</p>
         <h1 className="max-w-4xl font-display text-4xl font-extrabold leading-tight sm:text-5xl">{title}</h1>
         <p className="mt-5 max-w-2xl text-base leading-7 text-primary-foreground/80 sm:text-lg">{description}</p>
@@ -246,10 +252,16 @@ type ServiceKey = keyof typeof serviceContent;
 export function ServicePage({ service }: { service: ServiceKey }) {
   const item = serviceContent[service];
   const Icon = item.icon;
+  const serviceImages: Record<ServiceKey, { src: string; alt: string }> = {
+    study: { src: studyImage, alt: "Students exploring a university campus together" },
+    visa: { src: visaImage, alt: "Student reviewing visa paperwork with an advisor" },
+    residency: { src: residencyImage, alt: "Couple considering their future in Canada" },
+    loans: { src: financeImage, alt: "Family planning overseas study costs together" },
+  };
   return (
     <>
-      <PageBanner eyebrow={item.eyebrow} title={item.title} description={item.description} />
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+      <PageBanner eyebrow={item.eyebrow} title={item.title} description={item.description} image={serviceImages[service].src} imageAlt={serviceImages[service].alt} />
+      <section className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
         <div>
           <SectionLabel>Your journey, your way</SectionLabel>
           <h2 className="font-display text-3xl font-extrabold leading-tight text-foreground sm:text-4xl">The right support makes every next step clearer.</h2>
@@ -258,6 +270,9 @@ export function ServicePage({ service }: { service: ServiceKey }) {
             <a href={whatsappLink} target="_blank" rel="noreferrer">Discuss your plans <ArrowRight /></a>
           </Button>
         </div>
+        <img src={serviceImages[service].src} alt={serviceImages[service].alt} loading="lazy" width={1536} height={1024} className="aspect-[4/3] w-full object-cover" />
+      </section>
+      <section className="mx-auto grid max-w-7xl gap-8 px-5 pb-14 sm:px-6 sm:pb-20 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="border-t-2 border-accent bg-card px-6 py-7 sm:px-8">
           <div className="mb-5 flex items-center gap-3">
             <span className="grid size-11 place-items-center bg-secondary text-primary"><Icon className="size-5" /></span>
@@ -298,8 +313,8 @@ export function ContactStrip() {
 
 export function ContactPage() {
   return <>
-    <PageBanner eyebrow="Contact DLFLY Overseas" title="Tell us where you’d like to go." description="Start with a conversation. Our team can help you understand what to consider for your study, visa, residency or education finance plans." />
-    <section className="mx-auto grid max-w-7xl gap-12 px-5 py-14 sm:px-6 sm:py-20 md:grid-cols-[1fr_0.8fr]">
+    <PageBanner eyebrow="Contact DLFLY Overseas" title="Tell us where you’d like to go." description="Start with a conversation. Our team can help you understand what to consider for your study, visa, residency or education finance plans." image={visaImage} imageAlt="Student and advisor discussing overseas study plans" />
+    <section className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 sm:py-20 md:grid-cols-[1fr_0.8fr]">
       <div>
         <SectionLabel>We’re here to help</SectionLabel>
         <h2 className="font-display text-3xl font-extrabold">One conversation can help you find your next step.</h2>
@@ -320,6 +335,7 @@ export function ContactPage() {
           </ul>
         </div>
       </div>
+      <img src={studyImage} alt="Students walking together on a university campus" loading="lazy" width={1536} height={1024} className="aspect-[16/7] w-full object-cover md:col-span-2" />
     </section>
   </>;
 }
@@ -331,7 +347,7 @@ export function AboutPage() {
     { icon: Sparkles, title: "Your goals come first", text: "Start with your ambitions, then make choices that fit the future you want." },
   ];
   return <>
-    <PageBanner eyebrow="About DLFLY Overseas" title="Big ambitions deserve thoughtful support." description="We help students and families approach international education and future planning with clarity, care and a practical plan." />
+    <PageBanner eyebrow="About DLFLY Overseas" title="Big ambitions deserve thoughtful support." description="We help students and families approach international education and future planning with clarity, care and a practical plan." image={studyImage} imageAlt="Students walking through a university campus" />
     <section className="mx-auto grid max-w-7xl gap-12 px-5 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.1fr_0.9fr]">
       <div><SectionLabel>Who we are</SectionLabel><h2 className="font-display text-3xl font-extrabold">A steady hand for a big life decision.</h2><p className="mt-5 text-base leading-7 text-muted-foreground">Planning to study or build a life abroad is a big undertaking. DLFLY Overseas brings key parts of that journey into one conversation—from choosing a course and preparing an application to understanding visa steps and exploring education finance.</p><p className="mt-4 text-base leading-7 text-muted-foreground">We believe helpful guidance starts with listening. Your goals, your circumstances and your questions shape what comes next.</p></div>
       <div className="grid gap-0 border-t-2 border-accent">{values.map(({ icon: Icon, title, text }, index) => <div key={title} className="flex gap-5 border-b border-border py-6"><span className="font-display text-sm font-bold text-primary">0{index + 1}</span><div><h3 className="font-display font-extrabold">{title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p></div><Icon className="ml-auto size-5 shrink-0 text-primary" /></div>)}</div>
@@ -341,6 +357,17 @@ export function AboutPage() {
 }
 
 export function HomePage() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const slides = [
+    { image: studyImage, alt: "Indian students walking through a modern university campus", eyebrow: "Make your world bigger", title: <>Your future has<br className="hidden sm:block" /> no borders.</>, text: "From choosing a course to preparing for the next chapter, we’re here to help you move forward with a plan.", action: "Explore your options", to: "/study-abroad" },
+    { image: visaImage, alt: "Student and advisor reviewing an overseas application", eyebrow: "A clearer way forward", title: <>One plan for<br className="hidden sm:block" /> every next step.</>, text: "Get thoughtful guidance for applications, visa preparation and the practical details of your move.", action: "Explore visa guidance", to: "/visa" },
+    { image: residencyImage, alt: "Indian couple planning a future abroad", eyebrow: "Think beyond today", title: <>Build a future<br className="hidden sm:block" /> that feels yours.</>, text: "Explore your options for a life abroad, with careful preparation and support shaped around your goals.", action: "Explore your options", to: "/permanent-residency" },
+  ];
+  const currentSlide = slides[activeSlide];
+  useEffect(() => {
+    const timer = window.setInterval(() => setActiveSlide((index) => (index + 1) % slides.length), 6500);
+    return () => window.clearInterval(timer);
+  }, [slides.length]);
   const destinations = [
     { code: "UK", title: "United Kingdom", note: "A rich academic tradition" },
     { code: "US", title: "United States", note: "Room to explore your field" },
@@ -354,20 +381,27 @@ export function HomePage() {
     { icon: CircleDollarSign, title: "Education loans", text: "Explore study budgets and funding options.", to: "/education-loans" },
   ];
   return <>
-    <section className="relative isolate min-h-[570px] overflow-hidden bg-primary sm:min-h-[600px]">
-      <img src={campusImage} alt="Two students walking together on a university campus" fetchPriority="high" width={1600} height={1008} className="absolute inset-0 -z-20 size-full object-cover object-[64%_center]" />
+    <section className="group/hero relative isolate min-h-[570px] overflow-hidden bg-primary sm:min-h-[600px]" aria-roledescription="carousel" aria-label="DLFLY Overseas highlights">
+      <img key={currentSlide.image} src={currentSlide.image} alt={currentSlide.alt} fetchPriority="high" width={1536} height={1024} className="absolute inset-0 -z-20 size-full object-cover object-center transition-opacity duration-700" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/95 via-primary/75 to-primary/10" />
       <div className="mx-auto flex min-h-[570px] max-w-7xl items-center px-5 py-14 sm:min-h-[600px] sm:px-6">
         <div className="max-w-[620px] text-primary-foreground">
-          <p className="mb-5 inline-flex items-center gap-2 border border-primary-foreground/40 px-3 py-2 text-xs font-bold uppercase tracking-[0.16em]"><Sparkles className="size-3.5" /> Make your world bigger</p>
-          <h1 className="font-display text-4xl font-extrabold leading-[1.12] sm:text-6xl">Your future has<br className="hidden sm:block" /> no borders.</h1>
-          <p className="mt-5 max-w-lg text-base leading-7 text-primary-foreground/85 sm:text-lg">From choosing a course to preparing for the next chapter, we’re here to help you move forward with a plan.</p>
+          <p className="mb-5 inline-flex items-center gap-2 border border-primary-foreground/40 px-3 py-2 text-xs font-bold uppercase tracking-[0.16em]"><Sparkles className="size-3.5" /> {currentSlide.eyebrow}</p>
+          <h1 className="font-display text-4xl font-extrabold leading-[1.12] sm:text-6xl">{currentSlide.title}</h1>
+          <p className="mt-5 max-w-lg text-base leading-7 text-primary-foreground/85 sm:text-lg">{currentSlide.text}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild variant="secondary" size="lg" className="rounded-sm px-5"><Link to="/study-abroad">Explore your options <ArrowRight /></Link></Button>
+            <Button asChild variant="secondary" size="lg" className="rounded-sm px-5"><Link to={currentSlide.to}>{currentSlide.action} <ArrowRight /></Link></Button>
             <Button asChild variant="outline" size="lg" className="rounded-sm border-primary-foreground/60 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary"><a href={telephoneLink}><Phone /> Call our team</a></Button>
           </div>
           <p className="mt-6 flex items-center gap-2 text-sm text-primary-foreground/80"><BadgeCheck className="size-4" /> Study · Visa · Residency · Education finance</p>
         </div>
+      </div>
+      <div className="absolute bottom-5 left-5 flex items-center gap-2 sm:left-6" aria-label="Choose a featured slide">
+        {slides.map((slide, index) => <Button key={slide.eyebrow} type="button" size="icon" variant="outline" aria-label={`Show slide ${index + 1}: ${slide.eyebrow}`} aria-current={activeSlide === index ? "true" : undefined} onClick={() => setActiveSlide(index)} className="size-3 min-w-3 rounded-full border-primary-foreground bg-primary-foreground/60 p-0 aria-[current=true]:w-8 aria-[current=true]:bg-accent" />)}
+      </div>
+      <div className="absolute bottom-4 right-4 flex gap-2 sm:right-6">
+        <Button type="button" variant="outline" size="icon" aria-label="Previous slide" onClick={() => setActiveSlide((index) => (index + slides.length - 1) % slides.length)} className="rounded-full border-primary-foreground/70 bg-primary/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary"><ChevronLeft /></Button>
+        <Button type="button" variant="outline" size="icon" aria-label="Next slide" onClick={() => setActiveSlide((index) => (index + 1) % slides.length)} className="rounded-full border-primary-foreground/70 bg-primary/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary"><ChevronRight /></Button>
       </div>
       <div className="absolute bottom-0 right-0 hidden items-center gap-2 bg-accent px-6 py-4 font-display text-xs font-extrabold uppercase tracking-[0.12em] text-accent-foreground md:flex"><ArrowDownRight className="size-4" /> A future in motion</div>
     </section>
@@ -376,7 +410,7 @@ export function HomePage() {
       <div className="mx-auto grid max-w-7xl gap-7 px-5 py-9 sm:px-6 md:grid-cols-[1.1fr_2fr] md:items-center">
         <div><SectionLabel>Find your destination</SectionLabel><h2 className="font-display text-xl font-extrabold">Where could your studies take you?</h2></div>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {destinations.map(({ code, title, note }) => <div key={code} className="border-l-2 border-accent pl-3"><span className="font-display text-lg font-extrabold text-primary">{code}</span><h3 className="mt-1 text-sm font-bold">{title}</h3><p className="mt-1 text-xs leading-5 text-muted-foreground">{note}</p></div>)}
+          {destinations.map(({ code, title, note }, index) => <div key={code} className="min-w-0"><img src={[campusImage, visaImage, residencyImage, studyImage][index]} alt={`${title} study destination`} loading="lazy" width={1536} height={1024} className="mb-3 aspect-[5/3] w-full object-cover" /><span className="font-display text-lg font-extrabold text-primary">{code}</span><h3 className="mt-1 text-sm font-bold">{title}</h3><p className="mt-1 text-xs leading-5 text-muted-foreground">{note}</p></div>)}
         </div>
       </div>
     </section>
@@ -385,7 +419,8 @@ export function HomePage() {
       <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"><div><SectionLabel>Ways we can support you</SectionLabel><h2 className="max-w-2xl font-display text-3xl font-extrabold leading-tight sm:text-4xl">One team for the steps that matter.</h2></div><Link to="/contact" className="inline-flex items-center gap-2 text-sm font-bold text-primary">Talk to our team <ArrowRight className="size-4" /></Link></div>
       <div className="mt-9 grid border-t border-border sm:grid-cols-2 lg:grid-cols-4">
         {services.map(({ icon: Icon, title, text, to }, index) => <Link key={title} to={to} className="group border-b border-border py-6 sm:px-5 sm:first:pl-0 lg:border-b-0 lg:border-r lg:px-5 lg:first:pl-0 lg:last:border-r-0">
-          <div className="flex items-center justify-between"><span className="grid size-12 place-items-center bg-secondary text-primary"><Icon className="size-5" /></span><span className="font-display text-sm font-bold text-muted-foreground">0{index + 1}</span></div>
+          <img src={[studyImage, visaImage, residencyImage, financeImage][index]} alt={`${title} support`} loading="lazy" width={1536} height={1024} className="aspect-[5/3] w-full object-cover" />
+          <div className="mt-4 flex items-center justify-between"><span className="grid size-12 place-items-center bg-secondary text-primary"><Icon className="size-5" /></span><span className="font-display text-sm font-bold text-muted-foreground">0{index + 1}</span></div>
           <h3 className="mt-5 font-display text-lg font-extrabold">{title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p><span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">Explore <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></span>
         </Link>)}
       </div>
@@ -393,7 +428,7 @@ export function HomePage() {
 
     <section className="bg-secondary/60">
       <div className="mx-auto grid max-w-7xl gap-9 px-5 py-14 sm:px-6 sm:py-18 md:grid-cols-[0.85fr_1.15fr] md:items-center">
-        <div><SectionLabel>A more considered journey</SectionLabel><h2 className="font-display text-3xl font-extrabold leading-tight">From “what if?” to a plan that feels possible.</h2><p className="mt-4 text-sm leading-6 text-muted-foreground">Your goals are the starting point. We help connect the choices, paperwork and practical preparation that make an international study plan feel more within reach.</p><Button asChild className="mt-6 rounded-sm"><Link to="/about">Get to know us <ArrowUpRight /></Link></Button></div>
+        <div><SectionLabel>A more considered journey</SectionLabel><h2 className="font-display text-3xl font-extrabold leading-tight">From “what if?” to a plan that feels possible.</h2><p className="mt-4 text-sm leading-6 text-muted-foreground">Your goals are the starting point. We help connect the choices, paperwork and practical preparation that make an international study plan feel more within reach.</p><Button asChild className="mt-6 rounded-sm"><Link to="/about">Get to know us <ArrowUpRight /></Link></Button><img src={financeImage} alt="Family discussing overseas education plans together" loading="lazy" width={1536} height={1024} className="mt-8 aspect-[16/9] w-full object-cover" /></div>
         <div className="grid grid-cols-2 gap-px bg-border">
           {[{ icon: GraduationCap, title: "Explore", text: "Clarify what you want to study and where." }, { icon: BookOpenCheck, title: "Prepare", text: "Build a focused plan for your application." }, { icon: ShieldCheck, title: "Organise", text: "Understand the documents and timelines." }, { icon: Sparkles, title: "Get ready", text: "Take practical steps toward your next chapter." }].map(({ icon: Icon, title, text }) => <div key={title} className="bg-background p-5 sm:p-7"><Icon className="size-5 text-primary" /><h3 className="mt-4 font-display font-extrabold">{title}</h3><p className="mt-2 text-sm leading-5 text-muted-foreground">{text}</p></div>)}
         </div>
