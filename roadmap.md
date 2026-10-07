@@ -1,3 +1,3 @@
 - [x] Build branded homepage and shared responsive navigation/footer.
 - [x] Add dedicated study, visa, permanent residency, education loan, about, and contact pages.
-- [ ] Verify build status, routes, links, mobile layout, and metadata.
+- [x] Verify build status, routes, links, mobile layout, and metadata.
