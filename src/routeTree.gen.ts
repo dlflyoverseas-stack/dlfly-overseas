@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as EducationLoansRouteImport } from './routes/education-loans'
+import { Route as PermanentResidencyRouteImport } from './routes/permanent-residency'
+import { Route as StudyAbroadRouteImport } from './routes/study-abroad'
+import { Route as VisaRouteImport } from './routes/visa'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EducationLoansRoute = EducationLoansRouteImport.update({
+  id: '/education-loans',
+  path: '/education-loans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PermanentResidencyRoute = PermanentResidencyRouteImport.update({
+  id: '/permanent-residency',
+  path: '/permanent-residency',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudyAbroadRoute = StudyAbroadRouteImport.update({
+  id: '/study-abroad',
+  path: '/study-abroad',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisaRoute = VisaRouteImport.update({
+  id: '/visa',
+  path: '/visa',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/education-loans': typeof EducationLoansRoute
+  '/permanent-residency': typeof PermanentResidencyRoute
+  '/study-abroad': typeof StudyAbroadRoute
+  '/visa': typeof VisaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/education-loans': typeof EducationLoansRoute
+  '/permanent-residency': typeof PermanentResidencyRoute
+  '/study-abroad': typeof StudyAbroadRoute
+  '/visa': typeof VisaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/education-loans': typeof EducationLoansRoute
+  '/permanent-residency': typeof PermanentResidencyRoute
+  '/study-abroad': typeof StudyAbroadRoute
+  '/visa': typeof VisaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/education-loans'
+    | '/permanent-residency'
+    | '/study-abroad'
+    | '/visa'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/education-loans'
+    | '/permanent-residency'
+    | '/study-abroad'
+    | '/visa'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/education-loans'
+    | '/permanent-residency'
+    | '/study-abroad'
+    | '/visa'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  EducationLoansRoute: typeof EducationLoansRoute
+  PermanentResidencyRoute: typeof PermanentResidencyRoute
+  StudyAbroadRoute: typeof StudyAbroadRoute
+  VisaRoute: typeof VisaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/education-loans': {
+      id: '/education-loans'
+      path: '/education-loans'
+      fullPath: '/education-loans'
+      preLoaderRoute: typeof EducationLoansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/permanent-residency': {
+      id: '/permanent-residency'
+      path: '/permanent-residency'
+      fullPath: '/permanent-residency'
+      preLoaderRoute: typeof PermanentResidencyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/study-abroad': {
+      id: '/study-abroad'
+      path: '/study-abroad'
+      fullPath: '/study-abroad'
+      preLoaderRoute: typeof StudyAbroadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/visa': {
+      id: '/visa'
+      path: '/visa'
+      fullPath: '/visa'
+      preLoaderRoute: typeof VisaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  EducationLoansRoute: EducationLoansRoute,
+  PermanentResidencyRoute: PermanentResidencyRoute,
+  StudyAbroadRoute: StudyAbroadRoute,
+  VisaRoute: VisaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
