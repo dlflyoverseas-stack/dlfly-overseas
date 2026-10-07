@@ -403,7 +403,7 @@ export function HomePage() {
         <Button type="button" variant="outline" size="icon" aria-label="Previous slide" onClick={() => setActiveSlide((index) => (index + slides.length - 1) % slides.length)} className="rounded-full border-primary-foreground/70 bg-primary/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary"><ChevronLeft /></Button>
         <Button type="button" variant="outline" size="icon" aria-label="Next slide" onClick={() => setActiveSlide((index) => (index + 1) % slides.length)} className="rounded-full border-primary-foreground/70 bg-primary/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary"><ChevronRight /></Button>
       </div>
-      <div className="absolute bottom-0 right-0 hidden items-center gap-2 bg-accent px-6 py-4 font-display text-xs font-extrabold uppercase tracking-[0.12em] text-accent-foreground md:flex"><ArrowDownRight className="size-4" /> A future in motion</div>
+      <div className="pointer-events-none absolute bottom-0 right-0 hidden items-center gap-2 bg-accent px-6 py-4 font-display text-xs font-extrabold uppercase tracking-[0.12em] text-accent-foreground md:flex"><ArrowDownRight className="size-4" /> A future in motion</div>
     </section>
 
     <section className="border-b border-border bg-background">
