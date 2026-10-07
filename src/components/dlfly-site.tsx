@@ -362,8 +362,8 @@ export function HomePage() {
     { image: studyImage, alt: "Indian students walking through a modern university campus", eyebrow: "Make your world bigger", title: <>Your future has<br className="hidden sm:block" /> no borders.</>, text: "From choosing a course to preparing for the next chapter, we’re here to help you move forward with a plan.", action: "Explore your options", to: "/study-abroad" },
     { image: visaImage, alt: "Student and advisor reviewing an overseas application", eyebrow: "A clearer way forward", title: <>One plan for<br className="hidden sm:block" /> every next step.</>, text: "Get thoughtful guidance for applications, visa preparation and the practical details of your move.", action: "Explore visa guidance", to: "/visa" },
     { image: residencyImage, alt: "Indian couple planning a future abroad", eyebrow: "Think beyond today", title: <>Build a future<br className="hidden sm:block" /> that feels yours.</>, text: "Explore your options for a life abroad, with careful preparation and support shaped around your goals.", action: "Explore your options", to: "/permanent-residency" },
-  ];
-  const currentSlide = slides[activeSlide];
+  ] as const;
+  const currentSlide = slides[activeSlide] ?? slides[0];
   useEffect(() => {
     const timer = window.setInterval(() => setActiveSlide((index) => (index + 1) % slides.length), 6500);
     return () => window.clearInterval(timer);
