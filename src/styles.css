@@ -63,6 +63,43 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@utility nav-link {
+  color: var(--color-muted-foreground);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: color 150ms ease;
+  &:hover {
+    color: var(--color-primary);
+  }
+  &[data-status="active"] {
+    color: var(--color-primary);
+  }
+}
+
+@utility menu-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  color: var(--color-foreground);
+  font-size: 0.875rem;
+  transition: background-color 150ms ease;
+  &:hover {
+    background-color: var(--color-muted);
+  }
+}
+
+@utility mobile-nav-link {
+  display: block;
+  padding: 0.65rem 0.75rem;
+  color: var(--color-foreground);
+  font-size: 0.95rem;
+  font-weight: 600;
+  &:hover {
+    background-color: var(--color-muted);
+  }
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(0.985 0.008 91);
