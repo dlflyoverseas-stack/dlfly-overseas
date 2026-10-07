@@ -121,7 +121,7 @@ test("analytics send one page view per route and classify contact clicks", async
     );
   await expect.poll(async () => (await pageViews()).length).toBe(1);
   const first = await pageViews();
-  expect(first[0]?.[2]).toMatchObject({ page_location: "http://127.0.0.1:4178/" });
+  expect(first[0]?.[2]).toMatchObject({ page_location: new URL(page.url()).origin + "/" });
   expect(await page.evaluate(() => Object.prototype.toString.call(window.dataLayer?.[0]))).toBe(
     "[object Arguments]",
   );

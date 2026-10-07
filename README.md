@@ -51,6 +51,8 @@ bun run test
 bun run build
 bunx playwright install chromium webkit
 bun run test:e2e
+# Run the same checks against the public deployment:
+DLFLY_TEST_ORIGIN=https://dlflyoverseas.com bun run test:e2e
 ```
 
 The browser suite checks all public pages at desktop, tablet, Android, iPhone/WebKit and 320 px widths, the mobile dropdown without hero movement, content navigation, maps, admin entry, sitemap and robots. Content checks expect the starter articles and gallery to exist in the configured backend.

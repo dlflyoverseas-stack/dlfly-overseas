@@ -1,10 +1,11 @@
 import { defineConfig, devices } from "@playwright/test";
+const productionOrigin = process.env["DLFLY_TEST_ORIGIN"];
 export default defineConfig({
   testDir: "./tests/e2e",
   timeout: 60000,
   fullyParallel: true,
   workers: 3,
-  use: { baseURL: "http://127.0.0.1:4178", trace: "retain-on-failure" },
+  use: { baseURL: productionOrigin || "http://127.0.0.1:4178", trace: "retain-on-failure" },
   reporter: [["list"], ["html", { open: "never" }]],
   projects: [
     {
@@ -22,10 +23,14 @@ export default defineConfig({
     },
     { name: "iphone-safari", use: { ...devices["iPhone 13"] } },
   ],
-  webServer: {
-    command: "HOST=127.0.0.1 PORT=4178 node .output/server/index.mjs",
-    url: "http://127.0.0.1:4178",
-    reuseExistingServer: false,
-    timeout: 30000,
-  },
+  ...(productionOrigin
+    ? {}
+    : {
+        webServer: {
+          command: "HOST=127.0.0.1 PORT=4178 node .output/server/index.mjs",
+          url: "http://127.0.0.1:4178",
+          reuseExistingServer: false,
+          timeout: 30000,
+        },
+      }),
 });
