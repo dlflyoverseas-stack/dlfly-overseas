@@ -230,6 +230,8 @@ export function SiteHeader() {
 }
 
 export function SiteFooter() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => setReady(true), []);
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr] md:py-16">
@@ -286,7 +288,10 @@ export function SiteFooter() {
           <span>© {new Date().getFullYear()} DLFLY Overseas. All rights reserved.</span>
           <div className="flex flex-wrap gap-4">
             <Link to="/privacy">Privacy</Link>
-            <button onClick={() => window.dispatchEvent(new Event("dlfly-cookie-preferences"))}>
+            <button
+              disabled={!ready}
+              onClick={() => window.dispatchEvent(new Event("dlfly-cookie-preferences"))}
+            >
               Cookie preferences
             </button>
             <a href="/admin">Admin</a>
