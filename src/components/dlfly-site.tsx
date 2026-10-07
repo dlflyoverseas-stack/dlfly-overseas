@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowDownRight,
@@ -20,6 +20,7 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import campusImage from "@/assets/dlfly-campus.jpg";
 
 const phoneNumber = "+91 6304636998";
 const telephoneLink = "tel:+916304636998";
@@ -176,11 +177,11 @@ export function SiteFooter() {
   );
 }
 
-export function SiteLayout({ children }: { children: React.ReactNode }) {
+export function SiteLayout({ children }: { children: ReactNode }) {
   return <><SiteHeader /><main>{children}</main><SiteFooter /></>;
 }
 
-export function SectionLabel({ children }: { children: React.ReactNode }) {
+export function SectionLabel({ children }: { children: ReactNode }) {
   return <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.19em] text-primary">{children}</p>;
 }
 
