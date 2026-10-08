@@ -2,7 +2,6 @@ export const servicePresentation = {
   study: {
     image: "/images/service-study.jpg",
     imageAlt: "Students researching courses together in a university library",
-    caption: "Make room for your academic ambitions.",
     overviewTitle: "Build your study plan around you.",
     startingPoints: [
       "Your academic background",
@@ -19,7 +18,6 @@ export const servicePresentation = {
   visa: {
     image: "/images/service-visa.jpg",
     imageAlt: "Passport, application folder and travel essentials arranged for visa preparation",
-    caption: "Good preparation starts with an organised checklist.",
     overviewTitle: "Bring clarity to your application.",
     startingPoints: [
       "Your destination and purpose of travel",
@@ -36,7 +34,6 @@ export const servicePresentation = {
   residency: {
     image: "/images/service-residency.jpg",
     imageAlt: "Couple arriving at a new home with a suitcase and moving box",
-    caption: "Prepare thoughtfully for a long-term move.",
     overviewTitle: "Understand the preparation before you move.",
     startingPoints: [
       "Where you hope to settle",
@@ -53,7 +50,6 @@ export const servicePresentation = {
   loans: {
     image: "/images/service-loans.jpg",
     imageAlt: "Parent and student organising study costs with a calculator and notebook",
-    caption: "Connect your education goals with a realistic budget.",
     overviewTitle: "See the full picture of your study costs.",
     startingPoints: [
       "Your course and admission information",

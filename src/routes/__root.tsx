@@ -12,6 +12,7 @@ import type { ReactNode } from "react";
 import { MotionConfig } from "framer-motion";
 import { SiteSettingsProvider } from "@/context/site-settings";
 import { Analytics } from "@/components/analytics";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import { loadSiteSettings } from "@/lib/public-content";
 import { jsonLd, siteUrl } from "@/lib/seo";
 
@@ -129,6 +130,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <SiteSettingsProvider initial={settings}>
         <MotionConfig reducedMotion="user">
+          <SmoothScroll />
           <Analytics />
           <Outlet />
           <script

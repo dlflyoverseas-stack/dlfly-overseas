@@ -327,7 +327,9 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         Skip to content
       </a>
       <SiteHeader />
-      <main id="main-content">{children}</main>
+      <main id="main-content" tabIndex={-1}>
+        {children}
+      </main>
       <SiteFooter />
       <FloatingContact />
     </>
@@ -463,64 +465,58 @@ export function ServicePage({ service }: { service: ServiceKey }) {
   const Icon = item.icon;
   return (
     <>
-      <section className="bg-foreground text-white" aria-label={`${item.eyebrow} introduction`}>
-        <div className="mx-auto max-w-7xl px-5 py-6 sm:px-6 sm:py-8">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-white/75">
-            <Link to="/" className="underline-offset-4 hover:underline">
-              Home
-            </Link>
-            <ChevronRight className="size-3" aria-hidden="true" />
-            <span>Services</span>
-            <ChevronRight className="size-3" aria-hidden="true" />
-            <span aria-current="page" className="text-white">
-              {item.eyebrow}
-            </span>
-          </nav>
-          <div className="grid items-center gap-7 pb-2 pt-7 sm:gap-9 sm:pb-4 sm:pt-9 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
-            <div>
-              <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/75">
-                <Icon className="size-4" aria-hidden="true" /> DLFLY Overseas services
-              </p>
-              <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-[56px]">
+      <section
+        className="service-hero relative isolate overflow-hidden bg-background"
+        aria-label={`${item.eyebrow} introduction`}
+      >
+        <img
+          src={presentation.image}
+          alt={presentation.imageAlt}
+          fetchPriority="high"
+          width={1200}
+          height={800}
+          className="absolute inset-x-0 top-0 -z-10 h-[360px] w-full object-cover object-center sm:h-[440px] lg:h-full"
+        />
+        <div className="mx-auto flex max-w-7xl items-end px-5 pb-6 pt-[280px] sm:px-6 sm:pb-8 sm:pt-[340px] lg:min-h-[580px] lg:items-center lg:py-12">
+          <div className="service-hero-copy w-full max-w-[580px] rounded-lg bg-white p-6 sm:p-8 lg:p-10">
+            <nav
+              aria-label="Breadcrumb"
+              className="mb-6 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+            >
+              <Link to="/" className="underline-offset-4 hover:underline">
+                Home
+              </Link>
+              <ChevronRight className="size-3" aria-hidden="true" />
+              <span>Services</span>
+              <ChevronRight className="size-3" aria-hidden="true" />
+              <span aria-current="page" className="text-foreground">
                 {item.eyebrow}
-              </h1>
-              <p className="mt-4 max-w-xl font-display text-xl font-semibold leading-snug sm:text-2xl">
-                {item.title}
-              </p>
-              <p className="mt-4 max-w-xl text-sm leading-6 text-white/80 sm:text-base sm:leading-7">
-                {item.description}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Button asChild className="min-h-11 rounded-full px-5">
-                  <a href={whatsappLink} target="_blank" rel="noreferrer">
-                    Talk to an advisor <ArrowUpRight />
-                  </a>
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="min-h-11 rounded-full border-white/60 bg-transparent px-5 text-white hover:bg-white hover:text-foreground"
-                >
-                  <a href="#service-process">
-                    Explore the process <ArrowRight />
-                  </a>
-                </Button>
-              </div>
+              </span>
+            </nav>
+            <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-primary">
+              <Icon className="size-4 shrink-0" aria-hidden="true" /> DLFLY Overseas services
+            </p>
+            <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
+              {item.eyebrow}
+            </h1>
+            <p className="mt-4 font-display text-lg font-semibold leading-snug sm:text-xl">
+              {item.title}
+            </p>
+            <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
+              {item.description}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Button asChild className="min-h-11 rounded-full px-5">
+                <a href={whatsappLink} target="_blank" rel="noreferrer">
+                  Talk to an advisor <ArrowUpRight />
+                </a>
+              </Button>
+              <Button asChild variant="outline" className="min-h-11 rounded-full px-5">
+                <a href="#service-process">
+                  Explore the process <ArrowRight />
+                </a>
+              </Button>
             </div>
-            <figure className="min-w-0 overflow-hidden rounded-xl border border-white/15">
-              <img
-                src={presentation.image}
-                alt={presentation.imageAlt}
-                fetchPriority="high"
-                width={1200}
-                height={800}
-                className="aspect-[16/10] w-full object-cover lg:aspect-[3/2]"
-              />
-              <figcaption className="flex items-center gap-2 bg-white px-4 py-3 text-xs leading-5 text-foreground sm:text-sm">
-                <BadgeCheck className="size-4 shrink-0 text-primary" aria-hidden="true" />
-                {presentation.caption}
-              </figcaption>
-            </figure>
           </div>
         </div>
       </section>
