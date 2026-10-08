@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Mail, Phone, X } from "lucide-react";
 import { SiteBrand } from "./site-brand";
@@ -13,9 +13,23 @@ function WhatsAppIcon() {
 
 export function FloatingContact() {
   const [open, setOpen] = useState(false);
+  const [footerContactVisible, setFooterContactVisible] = useState(false);
   const reduced = useReducedMotion();
+  useEffect(() => {
+    const footerContact = document.getElementById("footer-contact-actions");
+    if (!footerContact || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(
+      ([entry]) =>
+        setFooterContactVisible(Boolean(entry?.isIntersecting && entry.intersectionRatio >= 1)),
+      { threshold: [0, 1] },
+    );
+    observer.observe(footerContact);
+    return () => observer.disconnect();
+  }, []);
   return (
-    <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex flex-col items-end gap-3 sm:right-6">
+    <div
+      className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex-col items-end gap-3 sm:right-6 ${footerContactVisible && !open ? "hidden" : "flex"}`}
+    >
       <AnimatePresence>
         {open && (
           <motion.aside

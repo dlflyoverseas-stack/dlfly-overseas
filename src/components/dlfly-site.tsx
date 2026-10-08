@@ -235,67 +235,73 @@ export function SiteFooter() {
   useEffect(() => setReady(true), []);
   return (
     <footer className="bg-[#19191c] text-primary-foreground">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr] md:py-16">
+      <div className="mx-auto grid max-w-7xl gap-5 px-5 py-6 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr] md:gap-8 md:py-10">
         <div>
           <Link to="/" className="inline-flex items-center gap-3" aria-label="DLFLY Overseas home">
             <SiteBrand light />
           </Link>
-          <p className="mt-5 max-w-sm text-sm leading-6 text-primary-foreground/75">
+          <p className="mt-3 hidden max-w-sm text-sm leading-6 text-primary-foreground/75 md:block">
             Thoughtful guidance for your journey to study, work and build a future abroad.
           </p>
         </div>
         <div>
-          <h2 className="mb-4 text-sm font-bold uppercase tracking-wider">Explore</h2>
-          <div className="grid gap-3 text-sm text-primary-foreground/75">
+          <h2 className="mb-1 text-xs font-bold uppercase tracking-wider md:mb-2">Services</h2>
+          <nav
+            aria-label="Footer services"
+            className="grid grid-cols-2 gap-x-3 text-sm text-primary-foreground/75 md:grid-cols-1"
+          >
             {serviceLinks.map(({ to, title }) => (
-              <Link key={to} to={to} className="hover:text-primary-foreground">
+              <Link
+                key={to}
+                to={to}
+                className="inline-flex min-h-10 items-center hover:text-primary-foreground"
+              >
                 {title}
               </Link>
             ))}
-            <Link to="/about" className="hover:text-primary-foreground">
-              About us
-            </Link>
-            <Link to="/contact" className="hover:text-primary-foreground">
-              Contact
-            </Link>
-            <Link to="/articles" className="hover:text-primary-foreground">
-              Articles
-            </Link>
-            <Link to="/gallery" className="hover:text-primary-foreground">
-              Gallery
-            </Link>
-            <Link to="/videos" className="hover:text-primary-foreground">
-              Videos
-            </Link>
-          </div>
+          </nav>
         </div>
-        <div>
-          <h2 className="mb-4 text-sm font-bold uppercase tracking-wider">Let’s talk</h2>
-          <a href={telephoneLink} className="inline-flex items-center gap-2 text-lg font-bold">
-            <Phone className="size-4" /> {phoneNumber}
+        <div id="footer-contact-actions" className="grid grid-cols-2 items-center gap-2 md:block">
+          <h2 className="mb-2 hidden text-xs font-bold uppercase tracking-wider md:block">
+            Let’s talk
+          </h2>
+          <a
+            href={telephoneLink}
+            className="inline-flex min-h-10 items-center gap-1.5 whitespace-nowrap text-[13px] font-bold sm:text-base md:text-lg"
+          >
+            <Phone className="size-3.5 shrink-0 md:size-4" /> {phoneNumber}
           </a>
-          <p className="mt-2 text-sm text-primary-foreground/70">
+          <p className="mt-2 hidden text-sm text-primary-foreground/70 md:block">
             Call us to start a conversation.
           </p>
-          <Button asChild variant="secondary" className="mt-5 rounded-full">
+          <Button
+            asChild
+            variant="secondary"
+            className="min-h-10 rounded-full px-3 text-[13px] md:mt-4 md:px-4 md:text-sm"
+          >
             <a href={whatsappLink} target="_blank" rel="noreferrer">
-              Message our team <ArrowUpRight />
+              WhatsApp <ArrowUpRight />
             </a>
           </Button>
         </div>
       </div>
       <div className="border-t border-primary-foreground/20">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-4 text-xs text-primary-foreground/70 sm:px-6 md:flex-row md:items-center md:justify-between">
+        <div className="mx-auto flex max-w-7xl flex-col gap-0 px-5 py-2 text-[11px] leading-4 text-primary-foreground/70 sm:px-6 md:flex-row md:flex-wrap md:items-center md:gap-x-6 md:py-3 md:text-xs">
           <span>© {new Date().getFullYear()} DLFLY Overseas. All rights reserved.</span>
-          <div className="flex flex-wrap gap-4">
-            <Link to="/privacy">Privacy</Link>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-0">
+            <Link to="/privacy" className="inline-flex min-h-8 items-center">
+              Privacy
+            </Link>
             <button
               disabled={!ready}
+              className="min-h-8"
               onClick={() => window.dispatchEvent(new Event("dlfly-cookie-preferences"))}
             >
               Cookie preferences
             </button>
-            <a href="/admin">Admin</a>
+            <a href="/admin" className="inline-flex min-h-8 items-center">
+              Admin
+            </a>
           </div>
           <span>
             Developed by{" "}
