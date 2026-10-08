@@ -8,7 +8,7 @@ export const Route = createFileRoute("/study-abroad")({
       "Study Abroad Guidance | DLFLY Overseas",
       "Explore courses and universities abroad with practical application and pre-departure guidance from DLFLY Overseas.",
       "/study-abroad",
-      "/images/dlfly-study.jpg",
+      "/images/service-study.jpg",
     ),
   component: StudyAbroadPage,
 });

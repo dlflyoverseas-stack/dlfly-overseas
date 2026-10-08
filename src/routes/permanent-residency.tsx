@@ -8,7 +8,7 @@ export const Route = createFileRoute("/permanent-residency")({
       "Permanent Residency Guidance | DLFLY Overseas",
       "Explore general permanent residency pathways and plan your preparation with DLFLY Overseas.",
       "/permanent-residency",
-      "/images/dlfly-residency.jpg",
+      "/images/service-residency.jpg",
     ),
   component: PermanentResidencyPage,
 });

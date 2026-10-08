@@ -8,7 +8,7 @@ export const Route = createFileRoute("/education-loans")({
       "Education Loans for Overseas Study | DLFLY Overseas",
       "Plan overseas study costs and explore education loan options with practical document guidance from DLFLY Overseas.",
       "/education-loans",
-      "/images/dlfly-finance.jpg",
+      "/images/service-loans.jpg",
     ),
   component: EducationLoansPage,
 });

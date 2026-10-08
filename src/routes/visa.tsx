@@ -8,7 +8,7 @@ export const Route = createFileRoute("/visa")({
       "Visa Application Guidance | DLFLY Overseas",
       "Get organised for your visa application with destination-specific document and preparation guidance from DLFLY Overseas.",
       "/visa",
-      "/images/dlfly-visa.jpg",
+      "/images/service-visa.jpg",
     ),
   component: VisaPage,
 });

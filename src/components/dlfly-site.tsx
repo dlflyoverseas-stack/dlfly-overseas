@@ -6,7 +6,6 @@ import {
   BadgeCheck,
   BookOpenCheck,
   BriefcaseBusiness,
-  Check,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -29,6 +28,7 @@ import { ContactLocation } from "./contact-location";
 import { ServiceProcess } from "./service-process";
 import { Reveal } from "./reveal";
 import { Button } from "@/components/ui/button";
+import { servicePresentation } from "@/data/service-presentation";
 import campusImage from "@/assets/dlfly-campus.jpg";
 import studyImage from "@/assets/dlfly-study.jpg";
 import visaImage from "@/assets/dlfly-visa.jpg";
@@ -395,18 +395,12 @@ export function PageBanner({
 export const serviceContent = {
   study: {
     eyebrow: "Study abroad",
-    title: "A world of learning. A future of possibility.",
+    title: "Find your course. Build your future.",
     description:
       "Find a course and campus that fit your ambitions, with practical guidance from your first shortlist to departure day.",
     icon: GraduationCap,
     intro:
       "Your international education journey should feel exciting—not overwhelming. We help you make thoughtful choices at every step, from selecting a destination to getting ready for your first day on campus.",
-    steps: [
-      "Understand your goals and preferred study destination",
-      "Shortlist courses and institutions that fit your profile",
-      "Get support with applications and document preparation",
-      "Plan visa steps, finances and pre-departure essentials",
-    ],
     points: [
       "Course and university shortlisting",
       "Application document guidance",
@@ -416,18 +410,12 @@ export const serviceContent = {
   },
   visa: {
     eyebrow: "Visa guidance",
-    title: "Make your visa application feel more manageable.",
+    title: "Prepare with a clearer plan.",
     description:
       "Get organised, understand what your application needs, and move forward with a clearer plan for your next destination.",
     icon: Plane,
     intro:
       "Visa processes can feel complicated when requirements, timelines and paperwork all come at once. We help you understand the steps for your destination and prepare an application that is clear, complete and carefully organised.",
-    steps: [
-      "Discuss your travel, study or migration goals",
-      "Review destination-specific documentation needs",
-      "Organise forms and supporting paperwork",
-      "Prepare for next steps with a clear application checklist",
-    ],
     points: [
       "Student visa application guidance",
       "Document and checklist support",
@@ -437,18 +425,12 @@ export const serviceContent = {
   },
   residency: {
     eyebrow: "Permanent residency",
-    title: "Plan your next chapter with a clearer path.",
+    title: "Get ready for your next chapter abroad.",
     description:
       "Explore residency possibilities and understand the preparation involved before taking your next step abroad.",
     icon: Compass,
     intro:
       "A long-term move begins with understanding your options. We can help you review your goals, learn about common migration pathways and organise questions to discuss with a qualified immigration professional.",
-    steps: [
-      "Talk through where you hope to build your future",
-      "Explore general pathways and preparation considerations",
-      "Organise your profile information and supporting documents",
-      "Get referred to an appropriately qualified professional for case-specific advice",
-    ],
     points: [
       "Initial pathway orientation",
       "Profile and document organisation",
@@ -464,12 +446,6 @@ export const serviceContent = {
     icon: CircleDollarSign,
     intro:
       "Planning the finances for an overseas education can be a big part of choosing where and what to study. We help you organise the costs, understand the documents lenders may request, and explore options that could fit your plans.",
-    steps: [
-      "Build an overview of tuition and living costs",
-      "Gather the information commonly requested by lenders",
-      "Explore education finance options that may be available",
-      "Plan for funding timelines alongside your application",
-    ],
     points: [
       "Study cost planning",
       "Education loan document checklist",
@@ -483,85 +459,145 @@ type ServiceKey = keyof typeof serviceContent;
 
 export function ServicePage({ service }: { service: ServiceKey }) {
   const item = serviceContent[service];
+  const presentation = servicePresentation[service];
   const Icon = item.icon;
-  const serviceImages: Record<ServiceKey, { src: string; alt: string }> = {
-    study: { src: studyImage, alt: "Students exploring a university campus together" },
-    visa: { src: visaImage, alt: "Student reviewing visa paperwork with an advisor" },
-    residency: { src: residencyImage, alt: "Couple considering their future in Canada" },
-    loans: { src: financeImage, alt: "Family planning overseas study costs together" },
-  };
   return (
     <>
-      <PageBanner
-        eyebrow={item.eyebrow}
-        title={item.title}
-        description={item.description}
-        image={serviceImages[service].src}
-        imageAlt={serviceImages[service].alt}
-      />
-      <section className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-6 sm:py-14 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
-        <div>
-          <SectionLabel>Your journey, your way</SectionLabel>
-          <h2 className="font-display text-3xl font-extrabold leading-tight text-foreground sm:text-4xl">
-            The right support makes every next step clearer.
-          </h2>
-          <p className="mt-5 text-base leading-7 text-muted-foreground">{item.intro}</p>
-          <Button asChild className="mt-7 rounded-full">
-            <a href={whatsappLink} target="_blank" rel="noreferrer">
-              Discuss your plans <ArrowRight />
-            </a>
-          </Button>
-        </div>
-        <img
-          src={serviceImages[service].src}
-          alt={serviceImages[service].alt}
-          loading="lazy"
-          width={1536}
-          height={1024}
-          className="aspect-[4/3] w-full rounded-3xl object-cover"
-        />
-      </section>
-      <section className="mx-auto grid max-w-7xl gap-8 px-5 pb-12 sm:px-6 sm:pb-14 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="rounded-2xl border border-border bg-card px-6 py-7 sm:px-8">
-          <div className="mb-5 flex items-center gap-3">
-            <span className="grid size-11 place-items-center bg-secondary text-primary">
-              <Icon className="size-5" />
+      <section className="bg-foreground text-white" aria-label={`${item.eyebrow} introduction`}>
+        <div className="mx-auto max-w-7xl px-5 py-6 sm:px-6 sm:py-8">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-white/75">
+            <Link to="/" className="underline-offset-4 hover:underline">
+              Home
+            </Link>
+            <ChevronRight className="size-3" aria-hidden="true" />
+            <span>Services</span>
+            <ChevronRight className="size-3" aria-hidden="true" />
+            <span aria-current="page" className="text-white">
+              {item.eyebrow}
             </span>
-            <h2 className="font-display text-xl font-extrabold">How we can help</h2>
-          </div>
-          <ul className="grid gap-4">
-            {item.points.map((point) => (
-              <li
-                key={point}
-                className="flex items-start gap-3 border-b border-border pb-4 text-sm leading-6 last:border-0 last:pb-0"
-              >
-                <Check className="mt-1 size-4 shrink-0 text-primary" />
-                {point}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="rounded-2xl bg-secondary/60 p-6 sm:p-8">
-          <SectionLabel>Turn your plans into next steps</SectionLabel>
-          <h2 className="font-display text-2xl font-extrabold">
-            A clear starting point for your journey.
-          </h2>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            {item.steps.map((step, index) => (
-              <div key={step} className="flex items-start gap-3 rounded-xl bg-white p-4">
-                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-primary text-xs font-bold text-white">
-                  {index + 1}
-                </span>
-                <p className="text-sm leading-6">{step}</p>
+          </nav>
+          <div className="grid items-center gap-7 pb-2 pt-7 sm:gap-9 sm:pb-4 sm:pt-9 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+            <div>
+              <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/75">
+                <Icon className="size-4" aria-hidden="true" /> DLFLY Overseas services
+              </p>
+              <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-[56px]">
+                {item.eyebrow}
+              </h1>
+              <p className="mt-4 max-w-xl font-display text-xl font-semibold leading-snug sm:text-2xl">
+                {item.title}
+              </p>
+              <p className="mt-4 max-w-xl text-sm leading-6 text-white/80 sm:text-base sm:leading-7">
+                {item.description}
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button asChild className="min-h-11 rounded-full px-5">
+                  <a href={whatsappLink} target="_blank" rel="noreferrer">
+                    Talk to an advisor <ArrowUpRight />
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="min-h-11 rounded-full border-white/60 bg-transparent px-5 text-white hover:bg-white hover:text-foreground"
+                >
+                  <a href="#service-process">
+                    Explore the process <ArrowRight />
+                  </a>
+                </Button>
               </div>
-            ))}
+            </div>
+            <figure className="min-w-0 overflow-hidden rounded-xl border border-white/15">
+              <img
+                src={presentation.image}
+                alt={presentation.imageAlt}
+                fetchPriority="high"
+                width={1200}
+                height={800}
+                className="aspect-[16/10] w-full object-cover lg:aspect-[3/2]"
+              />
+              <figcaption className="flex items-center gap-2 bg-white px-4 py-3 text-xs leading-5 text-foreground sm:text-sm">
+                <BadgeCheck className="size-4 shrink-0 text-primary" aria-hidden="true" />
+                {presentation.caption}
+              </figcaption>
+            </figure>
           </div>
-          <Link
-            to="/contact"
-            className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary"
+        </div>
+      </section>
+      <nav aria-label="On this service page" className="border-b border-border bg-background">
+        <div className="mx-auto grid max-w-7xl grid-cols-3 px-3 sm:flex sm:flex-wrap sm:gap-x-6 sm:px-6">
+          {[
+            ["Overview", "service-overview"],
+            ["Our support", "service-support"],
+            ["Process", "service-process"],
+            ["Checklist", "service-checklist"],
+            ["FAQs", "service-faqs"],
+          ].map(([label, id]) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className="flex min-h-12 items-center justify-center border-b-2 border-transparent px-2 text-xs font-semibold text-muted-foreground hover:border-primary hover:text-primary sm:justify-start sm:px-0 sm:text-sm"
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+      </nav>
+      <section id="service-overview" className="scroll-mt-28 border-b border-border">
+        <div className="mx-auto grid max-w-7xl gap-7 px-5 py-9 sm:px-6 sm:py-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12">
+          <div>
+            <SectionLabel>Overview</SectionLabel>
+            <h2 className="max-w-2xl font-display text-2xl font-extrabold leading-tight sm:text-3xl">
+              {presentation.overviewTitle}
+            </h2>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
+              {item.intro}
+            </p>
+          </div>
+          <aside
+            className="rounded-xl border border-border bg-muted p-5 sm:p-6"
+            aria-label="Your first conversation"
           >
-            Build your preparation plan <ArrowRight className="size-4" />
-          </Link>
+            <h3 className="font-display text-base font-extrabold">Start with your goals</h3>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              Share a few details to make your first conversation useful.
+            </p>
+            <ul className="mt-4 grid gap-3">
+              {presentation.startingPoints.map((point) => (
+                <li key={point} className="flex items-start gap-2 text-sm leading-5">
+                  <ChevronRight
+                    className="mt-0.5 size-4 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />{" "}
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </div>
+      </section>
+      <section
+        id="service-support"
+        className="mx-auto max-w-7xl scroll-mt-28 px-5 py-9 sm:px-6 sm:py-12"
+      >
+        <SectionLabel>Our support</SectionLabel>
+        <h2 className="font-display text-2xl font-extrabold sm:text-3xl">
+          How we help you move forward
+        </h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {item.points.map((point, index) => (
+            <Reveal
+              key={point}
+              delay={index * 0.04}
+              className="rounded-xl border border-border border-t-4 border-t-primary bg-card p-5"
+            >
+              <span className="text-xs font-bold text-primary">0{index + 1}</span>
+              <h3 className="mt-3 font-display text-base font-extrabold leading-6">{point}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                {presentation.support[index]}
+              </p>
+            </Reveal>
+          ))}
         </div>
       </section>
       <ServiceProcess service={service} />
@@ -805,8 +841,8 @@ export function HomePage() {
           <br className="hidden sm:block" /> no borders.
         </>
       ),
-      text: "From choosing a course to preparing for the next chapter, we’re here to help you move forward with a plan.",
-      action: "Explore your options",
+      text: "Choose your course, prepare your application and plan your move with guidance at every step.",
+      action: "Study abroad",
       to: "/study-abroad",
     },
     {
@@ -819,8 +855,8 @@ export function HomePage() {
           <br className="hidden sm:block" /> every next step.
         </>
       ),
-      text: "Get thoughtful guidance for applications, visa preparation and the practical details of your move.",
-      action: "Explore visa guidance",
+      text: "Get practical help with visa requirements, documents and the next steps in your application.",
+      action: "Visa guidance",
       to: "/visa",
     },
     {
@@ -833,8 +869,8 @@ export function HomePage() {
           <br className="hidden sm:block" /> that feels yours.
         </>
       ),
-      text: "Explore your options for a life abroad, with careful preparation and support shaped around your goals.",
-      action: "Explore your options",
+      text: "Explore pathways abroad and organise your preparation around your goals.",
+      action: "Residency",
       to: "/permanent-residency",
     },
   ] as const;
@@ -881,33 +917,36 @@ export function HomePage() {
   return (
     <>
       <section
-        className="group/hero relative isolate min-h-[570px] overflow-hidden bg-secondary/50 sm:min-h-[600px]"
+        className="group/hero relative isolate min-h-[570px] overflow-hidden bg-secondary sm:min-h-[600px]"
         aria-roledescription="carousel"
         aria-label="DLFLY Overseas highlights"
       >
         <img
-          key={currentSlide.image}
           src={currentSlide.image}
           alt={currentSlide.alt}
           fetchPriority="high"
           width={1536}
           height={1024}
-          className="absolute inset-0 -z-20 size-full object-cover object-[65%_center] transition-opacity duration-700"
+          className="absolute inset-0 -z-10 size-full object-cover object-[65%_center]"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-white via-white/90 to-white/5 max-md:from-white/95 max-md:via-white/85 max-md:to-white/60" />
-        <div className="mx-auto flex min-h-[570px] max-w-7xl items-center px-5 py-14 sm:min-h-[600px] sm:px-6">
-          <div className="max-w-[620px] text-foreground">
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.16em]">
+        <div className="mx-auto flex min-h-[570px] max-w-7xl items-center px-5 pb-16 pt-6 sm:min-h-[600px] sm:px-6 sm:py-14">
+          <div className="w-full max-w-[550px] rounded-2xl bg-white p-4 text-foreground shadow-lg sm:p-8">
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] sm:text-xs">
               <Sparkles className="size-3.5" /> {currentSlide.eyebrow}
             </p>
-            <h1 className="font-display text-4xl font-extrabold leading-[1.12] sm:text-6xl">
+            <h1 className="font-display text-[32px] font-extrabold leading-[1.12] sm:text-5xl lg:text-[52px]">
               {currentSlide.title}
             </h1>
-            <p className="mt-5 max-w-lg text-base leading-7 text-muted-foreground sm:text-lg">
+            <p className="mt-4 max-w-lg text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
               {currentSlide.text}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild variant="default" size="lg" className="rounded-full px-6">
+            <div className="mt-6 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+              <Button
+                asChild
+                variant="default"
+                size="lg"
+                className="h-11 rounded-full px-2 text-xs sm:px-5 sm:text-sm"
+              >
                 <Link to={currentSlide.to}>
                   {currentSlide.action} <ArrowRight />
                 </Link>
@@ -916,15 +955,16 @@ export function HomePage() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="rounded-full border-foreground/20 bg-white/80 text-foreground hover:bg-white"
+                className="h-11 rounded-full border-foreground/20 bg-white px-2 text-xs text-foreground hover:bg-secondary sm:px-5 sm:text-sm"
               >
                 <a href={telephoneLink}>
-                  <Phone /> Call our team
+                  <Phone /> Call us
                 </a>
               </Button>
             </div>
-            <p className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
-              <BadgeCheck className="size-4" /> Study · Visa · Residency · Education finance
+            <p className="mt-4 flex items-center gap-2 text-xs leading-5 text-muted-foreground sm:text-sm">
+              <BadgeCheck className="size-4 shrink-0" /> Study · Visa · Residency · Education
+              finance
             </p>
           </div>
         </div>
@@ -1019,15 +1059,7 @@ export function HomePage() {
               to={to}
               className="group overflow-hidden rounded-2xl border border-border bg-card p-4 transition-all hover:-translate-y-1 hover:shadow-lg"
             >
-              <img
-                src={[studyImage, visaImage, residencyImage, financeImage][index]}
-                alt={`${title} support`}
-                loading="lazy"
-                width={1536}
-                height={1024}
-                className="aspect-[5/3] w-full rounded-xl object-cover"
-              />
-              <div className="mt-4 flex items-center justify-between">
+              <div className="flex items-center justify-between">
                 <span className="grid size-10 place-items-center rounded-full bg-secondary text-primary">
                   <Icon className="size-5" />
                 </span>

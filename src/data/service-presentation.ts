@@ -1,0 +1,70 @@
+export const servicePresentation = {
+  study: {
+    image: "/images/service-study.jpg",
+    imageAlt: "Students researching courses together in a university library",
+    caption: "Make room for your academic ambitions.",
+    overviewTitle: "Build your study plan around you.",
+    startingPoints: [
+      "Your academic background",
+      "Courses and destinations you like",
+      "Your budget and preferred intake",
+    ],
+    support: [
+      "Compare course content, entry requirements and destinations around your interests and academic profile.",
+      "Bring transcripts, references and your statement of purpose into a clear application checklist.",
+      "Connect university deadlines, offer conditions and visa preparation in one practical schedule.",
+      "Prepare for accommodation, travel and the essentials of your first weeks on campus.",
+    ],
+  },
+  visa: {
+    image: "/images/service-visa.jpg",
+    imageAlt: "Passport, application folder and travel essentials arranged for visa preparation",
+    caption: "Good preparation starts with an organised checklist.",
+    overviewTitle: "Bring clarity to your application.",
+    startingPoints: [
+      "Your destination and purpose of travel",
+      "Your intended travel dates",
+      "Documents you have already prepared",
+    ],
+    support: [
+      "Understand the preparation involved in the student visa route for your chosen destination.",
+      "Organise identity records, forms and supporting evidence using the authority’s official checklist.",
+      "Keep submission, appointments and document deadlines together so you can plan the next steps.",
+      "Where an interview is required, practise explaining your plans clearly and truthfully.",
+    ],
+  },
+  residency: {
+    image: "/images/service-residency.jpg",
+    imageAlt: "Couple arriving at a new home with a suitcase and moving box",
+    caption: "Prepare thoughtfully for a long-term move.",
+    overviewTitle: "Understand the preparation before you move.",
+    startingPoints: [
+      "Where you hope to settle",
+      "Your education and employment history",
+      "Questions for a qualified professional",
+    ],
+    support: [
+      "Get an introduction to common pathways and the questions to explore using official information.",
+      "Bring education, employment and identity records together for professional review.",
+      "Understand which language tests or skills assessments may need further research and advice.",
+      "Identify the next questions to discuss with an appropriately qualified immigration professional.",
+    ],
+  },
+  loans: {
+    image: "/images/service-loans.jpg",
+    imageAlt: "Parent and student organising study costs with a calculator and notebook",
+    caption: "Connect your education goals with a realistic budget.",
+    overviewTitle: "See the full picture of your study costs.",
+    startingPoints: [
+      "Your course and admission information",
+      "Estimated tuition and living costs",
+      "Funding and deposit deadlines",
+    ],
+    support: [
+      "Put tuition, accommodation, living expenses and travel into a realistic cost estimate.",
+      "Organise academic, admission and financial information around each lender’s requirements.",
+      "Prepare questions about written terms, interest, fees, repayment and disbursement conditions.",
+      "Coordinate funding preparation with university deposits and your application schedule.",
+    ],
+  },
+} as const;
