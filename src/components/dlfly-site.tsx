@@ -7,7 +7,6 @@ import {
   BookOpenCheck,
   BriefcaseBusiness,
   ChevronDown,
-  ChevronLeft,
   ChevronRight,
   CircleDollarSign,
   Compass,
@@ -488,9 +487,9 @@ export function ServicePage({ service }: { service: ServiceKey }) {
           fetchPriority="high"
           width={1200}
           height={800}
-          className="absolute inset-x-0 top-0 -z-10 h-[360px] w-full object-cover object-center sm:h-[440px] lg:h-full"
+          className="service-hero-image block aspect-[3/2] w-full object-cover object-center sm:aspect-[16/7] lg:absolute lg:inset-0 lg:-z-10 lg:aspect-auto lg:h-full"
         />
-        <div className="mx-auto flex max-w-7xl items-end px-5 pb-6 pt-[280px] sm:px-6 sm:pb-8 sm:pt-[340px] lg:min-h-[580px] lg:items-center lg:py-12">
+        <div className="mx-auto flex max-w-7xl items-end px-5 py-6 sm:px-6 sm:py-8 lg:min-h-[580px] lg:items-center lg:py-12">
           <div className="service-hero-copy brand-dark brand-hero-panel w-full max-w-[580px] rounded-lg p-6 sm:p-8 lg:p-10">
             <nav
               aria-label="Breadcrumb"
@@ -926,7 +925,7 @@ export function HomePage() {
   return (
     <>
       <section
-        className="group/hero relative isolate min-h-[570px] overflow-hidden bg-secondary sm:min-h-[600px]"
+        className="home-hero group/hero relative isolate overflow-hidden bg-brand-ink lg:min-h-[600px] lg:bg-secondary"
         aria-roledescription="carousel"
         aria-label="DLFLY Overseas highlights"
       >
@@ -936,10 +935,10 @@ export function HomePage() {
           fetchPriority="high"
           width={1536}
           height={1024}
-          className="absolute inset-0 -z-10 size-full object-cover object-[65%_center]"
+          className="home-hero-image block aspect-[3/2] w-full object-cover object-[65%_center] sm:aspect-[16/7] lg:absolute lg:inset-0 lg:-z-10 lg:aspect-auto lg:h-full"
         />
-        <div className="mx-auto flex min-h-[570px] max-w-7xl items-center px-5 pb-16 pt-6 sm:min-h-[600px] sm:px-6 sm:py-14">
-          <div className="brand-dark brand-hero-panel w-full max-w-[550px] rounded-2xl p-4 shadow-lg sm:p-8">
+        <div className="mx-auto flex max-w-7xl items-center px-5 py-6 sm:px-6 sm:py-8 lg:min-h-[600px] lg:py-14">
+          <div className="home-hero-copy brand-dark brand-hero-panel w-full max-w-[550px] rounded-2xl p-4 shadow-lg sm:p-8">
             <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] sm:text-xs">
               <Sparkles className="size-3.5" /> {currentSlide.eyebrow}
             </p>
@@ -976,45 +975,6 @@ export function HomePage() {
               finance
             </p>
           </div>
-        </div>
-        <div
-          className="absolute bottom-5 left-5 flex items-center gap-2 sm:left-6"
-          aria-label="Choose a featured slide"
-        >
-          {slides.map((slide, index) => (
-            <Button
-              key={slide.eyebrow}
-              type="button"
-              size="icon"
-              variant="outline"
-              aria-label={`Show slide ${index + 1}: ${slide.eyebrow}`}
-              aria-current={activeSlide === index ? "true" : undefined}
-              onClick={() => setActiveSlide(index)}
-              className="size-3 min-w-3 rounded-full border-primary/50 bg-primary/20 p-0 aria-[current=true]:w-8 aria-[current=true]:bg-primary"
-            />
-          ))}
-        </div>
-        <div className="absolute bottom-4 left-36 flex gap-2 sm:left-44">
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            aria-label="Previous slide"
-            onClick={() => setActiveSlide((index) => (index + slides.length - 1) % slides.length)}
-            className="rounded-full border-border bg-white text-foreground hover:bg-secondary"
-          >
-            <ChevronLeft />
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            aria-label="Next slide"
-            onClick={() => setActiveSlide((index) => (index + 1) % slides.length)}
-            className="rounded-full border-border bg-white text-foreground hover:bg-secondary"
-          >
-            <ChevronRight />
-          </Button>
         </div>
       </section>
 
