@@ -8,7 +8,7 @@ export function ContactLocation() {
   return (
     <Reveal className="mx-auto max-w-7xl px-5 pb-16 sm:px-6">
       <div className="grid overflow-hidden rounded-xl border border-border bg-card md:grid-cols-[0.8fr_1.2fr]">
-        <div className="p-6 sm:p-9">
+        <div className="brand-dark p-6 sm:p-9">
           <p className="text-xs font-bold uppercase tracking-widest text-primary">Stay connected</p>
           <h2 className="mt-3 font-display text-2xl font-extrabold">
             Let’s talk about your future.

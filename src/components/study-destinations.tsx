@@ -12,7 +12,7 @@ function DestinationLink({ code, name }: { code: string; name: string }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Discuss studying in ${name} on WhatsApp (opens in a new tab)`}
-      className="group flex h-full min-w-0 flex-col gap-3 rounded-xl border border-border bg-card p-3 transition-colors hover:border-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:flex-row sm:items-center sm:gap-4 sm:p-4"
+      className="brand-destination-card group flex h-full min-w-0 flex-col gap-3 rounded-xl border border-border bg-card p-3 transition-colors hover:border-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:flex-row sm:items-center sm:gap-4 sm:p-4"
     >
       <span className="flex h-10 w-16 shrink-0 items-center justify-center">
         <img
@@ -37,7 +37,7 @@ export function StudyDestinations() {
     <section
       id="study-destinations"
       aria-labelledby="study-destinations-heading"
-      className="scroll-mt-28 border-b border-border bg-secondary/40"
+      className="brand-dark brand-destinations scroll-mt-28 border-b border-border"
     >
       <div className="mx-auto max-w-7xl px-5 py-9 sm:px-6 sm:py-12">
         <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-primary">

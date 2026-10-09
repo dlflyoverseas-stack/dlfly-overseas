@@ -1,6 +1,6 @@
 # DLFLY Overseas
 
-React and TanStack Start website for study abroad, visa guidance, permanent residency orientation and education finance. Service pages include preparation steps, checklists and FAQs. The image-rich interface uses a light hero, rounded cards and red calls to action. Hero dimensions and its position in the page flow are preserved; the Framer Motion mobile menu overlays it. Articles, gallery images, YouTube videos and site settings are managed through Firebase at `/admin`.
+React and TanStack Start website for study abroad, visa guidance, permanent residency orientation and education finance. Service pages include preparation steps, checklists and FAQs. The public interface combines deep navy, red and gold with warm neutral backgrounds, full-width hero images and solid text panels. Shared colour surfaces in `src/styles.css` keep text and controls readable across the country tiles, service cards, process sections and contact areas. The Framer Motion mobile menu overlays the hero. Articles, gallery images, YouTube videos and site settings are managed through Firebase at `/admin`.
 
 Enquiries: +91 6304636998 and dlflyoverseas@gmail.com. The footer credits [Octaleads](https://www.octaleads.com).
 

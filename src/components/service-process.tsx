@@ -6,7 +6,7 @@ export function ServiceProcess({ service }: { service: keyof typeof serviceDetai
   const detail = serviceDetails[service];
   return (
     <>
-      <section id="service-process" className="scroll-mt-28 bg-muted">
+      <section id="service-process" className="brand-dark scroll-mt-28">
         <div className="mx-auto max-w-7xl px-5 py-9 sm:px-6 sm:py-12">
           <Reveal>
             <p className="text-xs font-bold uppercase tracking-widest text-primary">
@@ -24,7 +24,7 @@ export function ServiceProcess({ service }: { service: keyof typeof serviceDetai
               <Reveal
                 key={title}
                 delay={(index % 3) * 0.06}
-                className="rounded-xl border border-border bg-card p-5 sm:p-6"
+                className="brand-journey-card rounded-xl border border-border bg-card p-5 sm:p-6"
               >
                 <span className="inline-flex size-9 items-center justify-center rounded-full bg-secondary text-sm font-extrabold text-primary">
                   0{index + 1}
@@ -39,7 +39,7 @@ export function ServiceProcess({ service }: { service: keyof typeof serviceDetai
       <section className="mx-auto grid max-w-7xl gap-8 px-5 py-9 sm:px-6 sm:py-12 lg:grid-cols-2 lg:gap-10">
         <div
           id="service-checklist"
-          className="scroll-mt-28 rounded-xl border border-border bg-muted p-5 sm:p-6"
+          className="brand-gold scroll-mt-28 rounded-xl border border-border p-5 sm:p-6"
         >
           <p className="text-xs font-bold uppercase tracking-widest text-primary">
             Prepare for your conversation

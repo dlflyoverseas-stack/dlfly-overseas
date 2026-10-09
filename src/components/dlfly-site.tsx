@@ -65,7 +65,7 @@ export function SiteHeader() {
   }, [menuOpen]);
   return (
     <>
-      <div className="hidden bg-secondary text-foreground sm:block">
+      <div className="brand-red hidden sm:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-xs">
           <span>Your next chapter, with a clearer plan.</span>
           <a className="inline-flex items-center gap-2" href={telephoneLink}>
@@ -74,7 +74,7 @@ export function SiteHeader() {
           </a>
         </div>
       </div>
-      <header className="sticky top-0 z-40 border-b border-border bg-white/95 backdrop-blur-xl">
+      <header className="site-header brand-dark sticky top-0 z-40 border-b border-border">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-6">
           <Link
             to="/"
@@ -93,7 +93,7 @@ export function SiteHeader() {
                 Our services{" "}
                 <ChevronDown className="size-3.5 transition-transform group-hover:rotate-180" />
               </Link>
-              <div className="invisible absolute left-0 top-full w-64 translate-y-2 rounded-2xl border border-border bg-background p-2 opacity-0 shadow-xl transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              <div className="site-dropdown invisible absolute left-0 top-full w-64 translate-y-2 rounded-2xl border border-border p-2 opacity-0 shadow-xl transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
                 {serviceLinks.map(({ to, title, icon: Icon }) => (
                   <Link key={to} to={to} className="menu-link">
                     <Icon className="size-4 text-primary" /> {title}
@@ -132,7 +132,7 @@ export function SiteHeader() {
               asChild
               variant="outline"
               size="icon"
-              className="rounded-full"
+              className="rounded-full border-border bg-transparent text-foreground hover:bg-secondary"
               aria-label="Call DLFLY Overseas"
             >
               <a href={telephoneLink}>
@@ -142,7 +142,7 @@ export function SiteHeader() {
             <Button
               variant="outline"
               size="icon"
-              className="rounded-full"
+              className="rounded-full border-border bg-transparent text-foreground hover:bg-secondary"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
               aria-controls="mobile-navigation"
@@ -161,7 +161,7 @@ export function SiteHeader() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              className="absolute inset-x-0 top-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-border bg-background px-5 py-4 shadow-xl xl:hidden"
+              className="site-dropdown absolute inset-x-0 top-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-border px-5 py-4 shadow-xl xl:hidden"
               aria-label="Mobile navigation"
             >
               <div className="mx-auto grid max-w-7xl gap-1">
@@ -237,7 +237,7 @@ export function SiteFooter() {
   const [ready, setReady] = useState(false);
   useEffect(() => setReady(true), []);
   return (
-    <footer className="bg-[#19191c] text-primary-foreground">
+    <footer className="site-footer bg-brand-ink text-white">
       <div className="mx-auto grid max-w-7xl gap-5 px-5 py-6 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr] md:gap-8 md:py-10">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 md:block">
           <Link to="/" className="inline-flex items-center gap-3" aria-label="DLFLY Overseas home">
@@ -335,7 +335,7 @@ export function SiteFooter() {
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   return (
-    <>
+    <div className="site-public">
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
@@ -345,7 +345,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       </main>
       <SiteFooter />
       <FloatingContact />
-    </>
+    </div>
   );
 }
 
@@ -371,10 +371,10 @@ export function PageBanner({
   imageAlt?: string;
 }) {
   return (
-    <section className="border-b border-border bg-secondary/50">
+    <section className="brand-dark border-b border-border">
       <div className="mx-auto grid max-w-7xl items-center gap-7 px-5 py-9 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-12">
         <div>
-          <p className="mb-4 inline-flex rounded-full border border-primary/20 bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary">
+          <p className="mb-4 inline-flex rounded-full border border-primary/40 px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary">
             {eyebrow}
           </p>
           <h1 className="max-w-3xl font-display text-3xl font-extrabold leading-tight text-foreground sm:text-4xl lg:text-5xl">
@@ -395,7 +395,7 @@ export function PageBanner({
             height={1024}
             className="aspect-[16/10] w-full object-cover"
           />
-          <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 rounded-2xl bg-white/95 p-4 text-sm font-semibold backdrop-blur">
+          <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 rounded-2xl bg-white p-4 text-sm font-semibold text-brand-ink">
             <span className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-primary">
               <GraduationCap className="size-5" />
             </span>
@@ -491,7 +491,7 @@ export function ServicePage({ service }: { service: ServiceKey }) {
           className="absolute inset-x-0 top-0 -z-10 h-[360px] w-full object-cover object-center sm:h-[440px] lg:h-full"
         />
         <div className="mx-auto flex max-w-7xl items-end px-5 pb-6 pt-[280px] sm:px-6 sm:pb-8 sm:pt-[340px] lg:min-h-[580px] lg:items-center lg:py-12">
-          <div className="service-hero-copy w-full max-w-[580px] rounded-lg bg-white p-6 sm:p-8 lg:p-10">
+          <div className="service-hero-copy brand-dark brand-hero-panel w-full max-w-[580px] rounded-lg p-6 sm:p-8 lg:p-10">
             <nav
               aria-label="Breadcrumb"
               className="mb-6 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
@@ -533,7 +533,7 @@ export function ServicePage({ service }: { service: ServiceKey }) {
           </div>
         </div>
       </section>
-      <nav aria-label="On this service page" className="border-b border-border bg-background">
+      <nav aria-label="On this service page" className="brand-gold border-b border-border">
         <div className="mx-auto grid max-w-7xl grid-cols-3 px-3 sm:flex sm:flex-wrap sm:gap-x-6 sm:px-6">
           {[
             ["Overview", "service-overview"],
@@ -553,7 +553,7 @@ export function ServicePage({ service }: { service: ServiceKey }) {
           ))}
         </div>
       </nav>
-      <section id="service-overview" className="scroll-mt-28 border-b border-border">
+      <section id="service-overview" className="brand-cool scroll-mt-28 border-b border-border">
         <div className="mx-auto grid max-w-7xl gap-7 px-5 py-9 sm:px-6 sm:py-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12">
           <div>
             <SectionLabel>Overview</SectionLabel>
@@ -626,7 +626,7 @@ export function ServicePage({ service }: { service: ServiceKey }) {
 
 export function ContactStrip() {
   return (
-    <section className="bg-primary text-white">
+    <section className="brand-contact-strip text-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-9 sm:px-6 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.17em]">
@@ -636,7 +636,11 @@ export function ContactStrip() {
             Let’s make your next step count.
           </h2>
         </div>
-        <Button asChild variant="secondary" className="w-fit rounded-full">
+        <Button
+          asChild
+          variant="secondary"
+          className="w-fit rounded-full bg-brand-gold text-brand-ink hover:bg-brand-gold/90"
+        >
           <a href={telephoneLink}>
             <Phone /> Call {phoneNumber} <ArrowUpRight />
           </a>
@@ -681,7 +685,7 @@ export function ContactPage() {
               </p>
             </div>
           </div>
-          <div className="p-6 sm:p-8 lg:p-10">
+          <div className="brand-dark p-6 sm:p-8 lg:p-10">
             <SectionLabel>Connect with an advisor</SectionLabel>
             <h2 className="font-display text-2xl font-extrabold sm:text-3xl">
               What would you like to explore?
@@ -707,7 +711,7 @@ export function ContactPage() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="flex min-h-12 items-center justify-between gap-3 rounded-full bg-primary px-5 py-3 text-sm font-bold text-white"
+                className="flex min-h-12 items-center justify-between gap-3 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground"
               >
                 <span className="flex items-center gap-3">
                   <MessageCircle className="size-5" />
@@ -800,7 +804,7 @@ export function AboutPage() {
         </div>
       </section>
       <Reveal className="mx-auto max-w-7xl px-5 pb-16 sm:px-6">
-        <div className="grid items-center gap-7 overflow-hidden rounded-3xl bg-secondary/60 p-6 sm:p-8 lg:grid-cols-2">
+        <div className="brand-dark grid items-center gap-7 overflow-hidden rounded-3xl p-6 sm:p-8 lg:grid-cols-2">
           <div>
             <SectionLabel>How we work</SectionLabel>
             <h2 className="font-display text-3xl font-extrabold">
@@ -935,7 +939,7 @@ export function HomePage() {
           className="absolute inset-0 -z-10 size-full object-cover object-[65%_center]"
         />
         <div className="mx-auto flex min-h-[570px] max-w-7xl items-center px-5 pb-16 pt-6 sm:min-h-[600px] sm:px-6 sm:py-14">
-          <div className="w-full max-w-[550px] rounded-2xl bg-white p-4 text-foreground shadow-lg sm:p-8">
+          <div className="brand-dark brand-hero-panel w-full max-w-[550px] rounded-2xl p-4 shadow-lg sm:p-8">
             <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] sm:text-xs">
               <Sparkles className="size-3.5" /> {currentSlide.eyebrow}
             </p>
@@ -960,7 +964,7 @@ export function HomePage() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="h-11 rounded-full border-foreground/20 bg-white px-2 text-xs text-foreground hover:bg-secondary sm:px-5 sm:text-sm"
+                className="h-11 rounded-full border-border bg-transparent px-2 text-xs text-foreground hover:bg-secondary sm:px-5 sm:text-sm"
               >
                 <a href={telephoneLink}>
                   <Phone /> Call us
@@ -1036,7 +1040,7 @@ export function HomePage() {
             <Link
               key={title}
               to={to}
-              className="group overflow-hidden rounded-2xl border border-border bg-card p-4 transition-all hover:-translate-y-1 hover:shadow-lg"
+              className={`brand-service-card group overflow-hidden rounded-2xl p-5 transition-shadow hover:shadow-lg ${["brand-dark", "brand-red", "brand-cool", "brand-gold"][index]}`}
             >
               <div className="flex items-center justify-between">
                 <span className="grid size-10 place-items-center rounded-full bg-secondary text-primary">
@@ -1057,7 +1061,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="bg-secondary/60">
+      <section className="brand-red">
         <div className="mx-auto grid max-w-7xl gap-9 px-5 py-12 sm:px-6 sm:py-14 md:grid-cols-[0.85fr_1.15fr] md:items-center">
           <div>
             <SectionLabel>A more considered journey</SectionLabel>
@@ -1107,7 +1111,7 @@ export function HomePage() {
             ].map(({ icon: Icon, title, text }) => (
               <div
                 key={title}
-                className="rounded-2xl border border-border bg-background p-5 sm:p-7"
+                className="brand-journey-card rounded-2xl border border-border bg-card p-5 sm:p-7"
               >
                 <Icon className="size-5 text-primary" />
                 <h3 className="mt-4 font-display font-extrabold">{title}</h3>
