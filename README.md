@@ -15,6 +15,8 @@ bun run dev
 
 Shared brochure presentation lives in `src/components/dlfly-site.tsx`. Public pages use file-based routes and server-render published Firestore content. Visible pages refresh content every minute and when the browser window regains focus. Unpublished records are accessible only to the approved admin.
 
+The homepage and Study Abroad page share `StudyDestinations`, with European countries defined in `src/data/study-destinations.ts`. Country links open a WhatsApp enquiry with the selected country. National flag SVGs in `public/images/flags/` are downloaded from [Flagcdn](https://flagcdn.com/) using its [documented ISO country codes](https://flagpedia.net/download/api), based on Wikimedia Commons vectors. Flags retain their original proportions and are country identifiers, not government endorsements or university partnership logos.
+
 ## Firebase and administration
 
 The business project is `dlflyoverseas-18486`, with Firestore in Mumbai (`asia-south1`). Enable the Google authentication provider and add the final deployment hostname to Authentication → Settings → Authorized domains.

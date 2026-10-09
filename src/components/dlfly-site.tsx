@@ -27,6 +27,7 @@ import { SiteBrand } from "./site-brand";
 import { FloatingContact } from "./floating-contact";
 import { ContactLocation } from "./contact-location";
 import { ServiceProcess } from "./service-process";
+import { StudyDestinations } from "./study-destinations";
 import { Reveal } from "./reveal";
 import { Button } from "@/components/ui/button";
 import { servicePresentation } from "@/data/service-presentation";
@@ -536,6 +537,7 @@ export function ServicePage({ service }: { service: ServiceKey }) {
         <div className="mx-auto grid max-w-7xl grid-cols-3 px-3 sm:flex sm:flex-wrap sm:gap-x-6 sm:px-6">
           {[
             ["Overview", "service-overview"],
+            ...(service === "study" ? [["Destinations", "study-destinations"]] : []),
             ["Our support", "service-support"],
             ["Process", "service-process"],
             ["Checklist", "service-checklist"],
@@ -584,6 +586,7 @@ export function ServicePage({ service }: { service: ServiceKey }) {
           </aside>
         </div>
       </section>
+      {service === "study" && <StudyDestinations />}
       <section
         id="service-support"
         className="mx-auto max-w-7xl scroll-mt-28 px-5 py-9 sm:px-6 sm:py-12"
@@ -890,12 +893,6 @@ export function HomePage() {
     );
     return () => window.clearInterval(timer);
   }, [slides.length]);
-  const destinations = [
-    { code: "UK", title: "United Kingdom", note: "A rich academic tradition" },
-    { code: "US", title: "United States", note: "Room to explore your field" },
-    { code: "CA", title: "Canada", note: "A welcoming study experience" },
-    { code: "AU", title: "Australia", note: "Learning with a global outlook" },
-  ];
   const services = [
     {
       icon: GraduationCap,
@@ -1017,33 +1014,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-border bg-background">
-        <div className="mx-auto grid max-w-7xl gap-7 px-5 py-9 sm:px-6 md:grid-cols-[1.1fr_2fr] md:items-center">
-          <div>
-            <SectionLabel>Find your destination</SectionLabel>
-            <h2 className="font-display text-xl font-extrabold">
-              Where could your studies take you?
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {destinations.map(({ code, title, note }, index) => (
-              <div key={code} className="min-w-0">
-                <img
-                  src={[campusImage, visaImage, residencyImage, studyImage][index]}
-                  alt="International education planning"
-                  loading="lazy"
-                  width={1536}
-                  height={1024}
-                  className="mb-3 aspect-[5/3] w-full rounded-xl object-cover"
-                />
-                <span className="font-display text-lg font-extrabold text-primary">{code}</span>
-                <h3 className="mt-1 text-sm font-bold">{title}</h3>
-                <p className="mt-1 text-xs leading-5 text-muted-foreground">{note}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StudyDestinations />
 
       <section className="mx-auto max-w-7xl px-5 py-12 sm:px-6 sm:py-14">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
