@@ -6,8 +6,8 @@ import { Reveal } from "./reveal";
 export function ContactLocation() {
   const settings = useSiteSettings();
   return (
-    <Reveal className="mx-auto max-w-7xl px-5 pb-16 sm:px-6">
-      <div className="grid overflow-hidden rounded-xl border border-border bg-card md:grid-cols-[0.8fr_1.2fr]">
+    <Reveal className="site-section">
+      <div className="grid bg-card md:grid-cols-[0.8fr_1.2fr]">
         <div className="brand-dark p-6 sm:p-9">
           <p className="text-xs font-bold uppercase tracking-widest text-primary">Stay connected</p>
           <h2 className="mt-3 font-display text-2xl font-extrabold">

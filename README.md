@@ -17,6 +17,8 @@ Shared brochure presentation lives in `src/components/dlfly-site.tsx`. Public pa
 
 The homepage and Study Abroad page share `StudyDestinations`, with all countries defined in `src/data/study-destinations.ts`. United Kingdom, United States, Canada, Australia and New Zealand appear first, followed by the European destinations. Country links open a WhatsApp enquiry with the selected country. National flag SVGs in `public/images/flags/` are downloaded from [Flagcdn](https://flagcdn.com/) using its [documented ISO country codes](https://flagpedia.net/download/api), based on Wikimedia Commons vectors. Flags retain their original proportions and are country identifiers, not government endorsements or university partnership logos.
 
+Public page sections and the footer share gold borders, curved corners and responsive side gutters through `.site-public` section variables in `src/styles.css`. Inner containers retain comfortable reading widths. Top-level animated sections use the `site-section` class; the mobile menu overlays the framed hero, with photos remaining above the copy on phones and tablets.
+
 Visit Visa (`/visit-visa`) and Dependent Visa (`/dependent-visa`) each use the shared service layout, with their own hero photo, preparation steps, checklist and FAQs. General preparation content follows official visitor and dependant guidance, including [GOV.UK visitor information](https://www.gov.uk/standard-visitor) and [GOV.UK dependant information](https://www.gov.uk/student-visa/family-members); route-specific eligibility and document requirements must be checked with the relevant authority.
 
 ## Firebase and administration

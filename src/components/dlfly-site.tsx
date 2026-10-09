@@ -276,7 +276,10 @@ export function SiteFooter() {
             ))}
           </nav>
         </div>
-        <div id="footer-contact-actions" className="grid grid-cols-2 items-center gap-2 md:block">
+        <div
+          id="footer-contact-actions"
+          className="grid grid-cols-[1.1fr_0.9fr] items-center gap-2 md:block"
+        >
           <h2 className="mb-2 hidden text-xs font-bold uppercase tracking-wider md:block">
             Let’s talk
           </h2>
@@ -619,33 +622,32 @@ export function ServicePage({ service }: { service: ServiceKey }) {
         </div>
       </section>
       {service === "study" && <StudyDestinations />}
-      <section
-        id="service-support"
-        className="mx-auto max-w-7xl scroll-mt-28 px-5 py-9 sm:px-6 sm:py-12"
-      >
-        <SectionLabel>Our support</SectionLabel>
-        <h2 className="font-display text-2xl font-extrabold sm:text-3xl">
-          How we help you move forward
-        </h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {item.points.map((point, index) => (
-            <Reveal
-              key={point}
-              delay={index * 0.04}
-              className="rounded-xl border border-border border-t-4 border-t-primary bg-card p-5"
-            >
-              <span className="text-xs font-bold text-primary">0{index + 1}</span>
-              <h3 className="mt-3 font-display text-base font-extrabold leading-6">{point}</h3>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                {presentation.support[index]}
-              </p>
-            </Reveal>
-          ))}
+      <section id="service-support" className="scroll-mt-28">
+        <div className="mx-auto max-w-7xl px-5 py-9 sm:px-6 sm:py-12">
+          <SectionLabel>Our support</SectionLabel>
+          <h2 className="font-display text-2xl font-extrabold sm:text-3xl">
+            How we help you move forward
+          </h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {item.points.map((point, index) => (
+              <Reveal
+                key={point}
+                delay={index * 0.04}
+                className="rounded-xl border border-border border-t-4 border-t-primary bg-card p-5"
+              >
+                <span className="text-xs font-bold text-primary">0{index + 1}</span>
+                <h3 className="mt-3 font-display text-base font-extrabold leading-6">{point}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                  {presentation.support[index]}
+                </p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
       <ServiceProcess service={service} />
       {service === "residency" && (
-        <p className="mx-auto max-w-7xl px-5 pb-8 text-xs leading-6 text-muted-foreground">
+        <p className="site-section px-5 py-5 text-xs leading-6 text-muted-foreground sm:px-6">
           Immigration eligibility and requirements depend on your circumstances and may change.
           DLFLY Overseas provides general orientation and referral guidance, not legal or
           immigration advice.
@@ -692,8 +694,8 @@ export function ContactPage() {
         image={visaImage}
         imageAlt="Student and advisor discussing overseas study plans"
       />
-      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-6">
-        <div className="grid overflow-hidden rounded-3xl border border-border bg-card lg:grid-cols-[0.9fr_1.1fr]">
+      <section>
+        <div className="grid bg-card lg:grid-cols-[0.9fr_1.1fr]">
           <div className="relative min-h-[300px] bg-secondary">
             <img
               src={studyImage}
@@ -806,37 +808,39 @@ export function AboutPage() {
         image={studyImage}
         imageAlt="Students walking through a university campus"
       />
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-12 sm:px-6 sm:py-14 md:grid-cols-[1.1fr_0.9fr]">
-        <div>
-          <SectionLabel>Who we are</SectionLabel>
-          <h2 className="font-display text-3xl font-extrabold">
-            A steady hand for a big life decision.
-          </h2>
-          <p className="mt-5 text-base leading-7 text-muted-foreground">
-            Planning to study or build a life abroad is a big undertaking. DLFLY Overseas brings key
-            parts of that journey into one conversation—from choosing a course and preparing an
-            application to understanding visa steps and exploring education finance.
-          </p>
-          <p className="mt-4 text-base leading-7 text-muted-foreground">
-            We believe helpful guidance starts with listening. Your goals, your circumstances and
-            your questions shape what comes next.
-          </p>
-        </div>
-        <div className="grid gap-0 border-t-2 border-accent">
-          {values.map(({ icon: Icon, title, text }, index) => (
-            <div key={title} className="flex gap-5 border-b border-border py-6">
-              <span className="font-display text-sm font-bold text-primary">0{index + 1}</span>
-              <div>
-                <h3 className="font-display font-extrabold">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p>
+      <section>
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-12 sm:px-6 sm:py-14 md:grid-cols-[1.1fr_0.9fr]">
+          <div>
+            <SectionLabel>Who we are</SectionLabel>
+            <h2 className="font-display text-3xl font-extrabold">
+              A steady hand for a big life decision.
+            </h2>
+            <p className="mt-5 text-base leading-7 text-muted-foreground">
+              Planning to study or build a life abroad is a big undertaking. DLFLY Overseas brings
+              key parts of that journey into one conversation—from choosing a course and preparing
+              an application to understanding visa steps and exploring education finance.
+            </p>
+            <p className="mt-4 text-base leading-7 text-muted-foreground">
+              We believe helpful guidance starts with listening. Your goals, your circumstances and
+              your questions shape what comes next.
+            </p>
+          </div>
+          <div className="grid gap-0 border-t-2 border-accent">
+            {values.map(({ icon: Icon, title, text }, index) => (
+              <div key={title} className="flex gap-5 border-b border-border py-6">
+                <span className="font-display text-sm font-bold text-primary">0{index + 1}</span>
+                <div>
+                  <h3 className="font-display font-extrabold">{title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p>
+                </div>
+                <Icon className="ml-auto size-5 shrink-0 text-primary" />
               </div>
-              <Icon className="ml-auto size-5 shrink-0 text-primary" />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
-      <Reveal className="mx-auto max-w-7xl px-5 pb-16 sm:px-6">
-        <div className="brand-dark grid items-center gap-7 overflow-hidden rounded-3xl p-6 sm:p-8 lg:grid-cols-2">
+      <Reveal className="site-section brand-dark">
+        <div className="mx-auto grid max-w-7xl items-center gap-7 px-5 py-9 sm:px-6 sm:py-12 lg:grid-cols-2">
           <div>
             <SectionLabel>How we work</SectionLabel>
             <h2 className="font-display text-3xl font-extrabold">
@@ -1025,44 +1029,46 @@ export function HomePage() {
 
       <StudyDestinations />
 
-      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-6 sm:py-14">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <SectionLabel>Ways we can support you</SectionLabel>
-            <h2 className="max-w-2xl font-display text-3xl font-extrabold leading-tight sm:text-4xl">
-              One team for the steps that matter.
-            </h2>
-          </div>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 text-sm font-bold text-primary"
-          >
-            Talk to our team <ArrowRight className="size-4" />
-          </Link>
-        </div>
-        <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ icon: Icon, title, text, to }, index) => (
+      <section>
+        <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 sm:py-14">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <SectionLabel>Ways we can support you</SectionLabel>
+              <h2 className="max-w-2xl font-display text-3xl font-extrabold leading-tight sm:text-4xl">
+                One team for the steps that matter.
+              </h2>
+            </div>
             <Link
-              key={title}
-              to={to}
-              className={`brand-service-card group overflow-hidden rounded-2xl p-5 transition-shadow hover:shadow-lg ${["brand-dark", "brand-red", "brand-cool", "brand-gold"][index % 4]}`}
+              to="/contact"
+              className="inline-flex items-center gap-2 text-sm font-bold text-primary"
             >
-              <div className="flex items-center justify-between">
-                <span className="grid size-10 place-items-center rounded-full bg-secondary text-primary">
-                  <Icon className="size-5" />
-                </span>
-                <span className="font-display text-sm font-bold text-muted-foreground">
-                  0{index + 1}
-                </span>
-              </div>
-              <h3 className="mt-4 font-display text-lg font-extrabold">{title}</h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p>
-              <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
-                Explore{" "}
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-              </span>
+              Talk to our team <ArrowRight className="size-4" />
             </Link>
-          ))}
+          </div>
+          <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map(({ icon: Icon, title, text, to }, index) => (
+              <Link
+                key={title}
+                to={to}
+                className={`brand-service-card group overflow-hidden rounded-2xl p-5 transition-shadow hover:shadow-lg ${["brand-dark", "brand-red", "brand-cool", "brand-gold"][index % 4]}`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="grid size-10 place-items-center rounded-full bg-secondary text-primary">
+                    <Icon className="size-5" />
+                  </span>
+                  <span className="font-display text-sm font-bold text-muted-foreground">
+                    0{index + 1}
+                  </span>
+                </div>
+                <h3 className="mt-4 font-display text-lg font-extrabold">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                  Explore{" "}
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1126,55 +1132,57 @@ export function HomePage() {
           </div>
         </div>
       </section>
-      <Reveal className="mx-auto max-w-7xl px-5 py-16 sm:px-6">
-        <SectionLabel>Explore and prepare</SectionLabel>
-        <h2 className="font-display text-3xl font-extrabold">More ways to get ready.</h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {[
-            {
-              to: "/articles",
-              title: "Practical articles",
-              text: "Read planning guides for applications, documents and education finance.",
-            },
-            {
-              to: "/gallery",
-              title: "Our gallery",
-              text: "Explore the visuals behind your next chapter with DLFLY Overseas.",
-            },
-            {
-              to: "/videos",
-              title: "Video library",
-              text: "Watch helpful videos selected by our team, at your own pace.",
-            },
-          ].map((item) => (
-            <Link
-              key={item.to}
-              to={item.to as "/articles" | "/gallery" | "/videos"}
-              className="overflow-hidden rounded-2xl border border-border bg-card"
-            >
-              <img
-                src={
-                  item.to === "/articles"
-                    ? financeImage
-                    : item.to === "/gallery"
-                      ? studyImage
-                      : visaImage
-                }
-                alt=""
-                width={600}
-                height={400}
-                loading="lazy"
-                className="aspect-[16/9] w-full object-cover"
-              />
-              <div className="p-5">
-                <h3 className="font-display text-xl font-extrabold">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.text}</p>
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
-                  Explore <ArrowRight className="size-4" />
-                </span>
-              </div>
-            </Link>
-          ))}
+      <Reveal className="site-section">
+        <div className="mx-auto max-w-7xl px-5 py-9 sm:px-6 sm:py-12">
+          <SectionLabel>Explore and prepare</SectionLabel>
+          <h2 className="font-display text-3xl font-extrabold">More ways to get ready.</h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {[
+              {
+                to: "/articles",
+                title: "Practical articles",
+                text: "Read planning guides for applications, documents and education finance.",
+              },
+              {
+                to: "/gallery",
+                title: "Our gallery",
+                text: "Explore the visuals behind your next chapter with DLFLY Overseas.",
+              },
+              {
+                to: "/videos",
+                title: "Video library",
+                text: "Watch helpful videos selected by our team, at your own pace.",
+              },
+            ].map((item) => (
+              <Link
+                key={item.to}
+                to={item.to as "/articles" | "/gallery" | "/videos"}
+                className="overflow-hidden rounded-2xl border border-border bg-card"
+              >
+                <img
+                  src={
+                    item.to === "/articles"
+                      ? financeImage
+                      : item.to === "/gallery"
+                        ? studyImage
+                        : visaImage
+                  }
+                  alt=""
+                  width={600}
+                  height={400}
+                  loading="lazy"
+                  className="aspect-[16/9] w-full object-cover"
+                />
+                <div className="p-5">
+                  <h3 className="font-display text-xl font-extrabold">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.text}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                    Explore <ArrowRight className="size-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </Reveal>
       <ContactStrip />

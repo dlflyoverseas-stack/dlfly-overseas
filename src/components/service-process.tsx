@@ -36,46 +36,48 @@ export function ServiceProcess({ service }: { service: keyof typeof serviceDetai
           </div>
         </div>
       </section>
-      <section className="mx-auto grid max-w-7xl gap-8 px-5 py-9 sm:px-6 sm:py-12 lg:grid-cols-2 lg:gap-10">
-        <div
-          id="service-checklist"
-          className="brand-gold scroll-mt-28 rounded-xl border border-border p-5 sm:p-6"
-        >
-          <p className="text-xs font-bold uppercase tracking-widest text-primary">
-            Prepare for your conversation
-          </p>
-          <h2 className="mt-3 font-display text-2xl font-extrabold sm:text-3xl">
-            A useful starting checklist.
-          </h2>
-          <ul className="mt-5 divide-y divide-border">
-            {detail.checklist.map((item) => (
-              <li key={item} className="flex gap-3 py-3 text-sm leading-6">
-                <Check className="mt-1 size-4 shrink-0 text-primary" aria-hidden="true" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div id="service-faqs" className="scroll-mt-28 py-1 lg:py-6">
-          <p className="text-xs font-bold uppercase tracking-widest text-primary">
-            Common questions
-          </p>
-          <h2 className="mt-3 font-display text-2xl font-extrabold sm:text-3xl">
-            Know what comes next.
-          </h2>
-          <div className="mt-5 divide-y divide-border border-y border-border">
-            {detail.faqs.map(([question, answer]) => (
-              <details key={question} className="group py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">
-                  <span>{question}</span>
-                  <ChevronDown
-                    className="size-5 shrink-0 text-primary transition-transform group-open:rotate-180"
-                    aria-hidden="true"
-                  />
-                </summary>
-                <p className="mt-4 text-sm leading-7 text-muted-foreground">{answer}</p>
-              </details>
-            ))}
+      <section>
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-9 sm:px-6 sm:py-12 lg:grid-cols-2 lg:gap-10">
+          <div
+            id="service-checklist"
+            className="brand-gold scroll-mt-28 rounded-xl border border-border p-5 sm:p-6"
+          >
+            <p className="text-xs font-bold uppercase tracking-widest text-primary">
+              Prepare for your conversation
+            </p>
+            <h2 className="mt-3 font-display text-2xl font-extrabold sm:text-3xl">
+              A useful starting checklist.
+            </h2>
+            <ul className="mt-5 divide-y divide-border">
+              {detail.checklist.map((item) => (
+                <li key={item} className="flex gap-3 py-3 text-sm leading-6">
+                  <Check className="mt-1 size-4 shrink-0 text-primary" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div id="service-faqs" className="scroll-mt-28 py-1 lg:py-6">
+            <p className="text-xs font-bold uppercase tracking-widest text-primary">
+              Common questions
+            </p>
+            <h2 className="mt-3 font-display text-2xl font-extrabold sm:text-3xl">
+              Know what comes next.
+            </h2>
+            <div className="mt-5 divide-y divide-border border-y border-border">
+              {detail.faqs.map(([question, answer]) => (
+                <details key={question} className="group py-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">
+                    <span>{question}</span>
+                    <ChevronDown
+                      className="size-5 shrink-0 text-primary transition-transform group-open:rotate-180"
+                      aria-hidden="true"
+                    />
+                  </summary>
+                  <p className="mt-4 text-sm leading-7 text-muted-foreground">{answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </div>
       </section>
