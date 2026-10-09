@@ -12,6 +12,7 @@ import {
   CircleDollarSign,
   Compass,
   GraduationCap,
+  Instagram,
   Menu,
   Mail,
   MessageCircle,
@@ -29,6 +30,7 @@ import { ServiceProcess } from "./service-process";
 import { Reveal } from "./reveal";
 import { Button } from "@/components/ui/button";
 import { servicePresentation } from "@/data/service-presentation";
+import { instagramUrl } from "@/lib/social-links";
 import campusImage from "@/assets/dlfly-campus.jpg";
 import studyImage from "@/assets/dlfly-study.jpg";
 import visaImage from "@/assets/dlfly-visa.jpg";
@@ -243,6 +245,16 @@ export function SiteFooter() {
           <p className="mt-3 hidden max-w-sm text-sm leading-6 text-primary-foreground/75 md:block">
             Thoughtful guidance for your journey to study, work and build a future abroad.
           </p>
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow DLFLY Overseas on Instagram (opens in a new tab)"
+            className="mt-1 inline-flex min-h-11 items-center gap-2 text-sm text-primary-foreground/75 transition-colors hover:text-primary-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-foreground md:mt-2"
+          >
+            <Instagram className="size-4 shrink-0" aria-hidden="true" /> Instagram
+            <ArrowUpRight className="size-3.5" aria-hidden="true" />
+          </a>
         </div>
         <div>
           <h2 className="mb-1 text-xs font-bold uppercase tracking-wider md:mb-2">Services</h2>

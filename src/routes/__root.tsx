@@ -15,6 +15,7 @@ import { Analytics } from "@/components/analytics";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { loadSiteSettings } from "@/lib/public-content";
 import { jsonLd, siteUrl } from "@/lib/seo";
+import { instagramUrl } from "@/lib/social-links";
 
 import appCss from "../styles.css?url";
 
@@ -143,6 +144,7 @@ function RootComponent() {
                 url: siteUrl,
                 telephone: "+91 6304636998",
                 email: "dlflyoverseas@gmail.com",
+                sameAs: [instagramUrl],
                 ...(settings.logoUrl ? { logo: settings.logoUrl } : {}),
               }),
             }}

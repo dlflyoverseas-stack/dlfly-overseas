@@ -1,5 +1,6 @@
-import { MapPin, Mail } from "lucide-react";
+import { MapPin, Mail, Instagram, ArrowUpRight } from "lucide-react";
 import { useSiteSettings } from "@/context/site-settings";
+import { instagramUrl } from "@/lib/social-links";
 import { Reveal } from "./reveal";
 
 export function ContactLocation() {
@@ -22,6 +23,17 @@ export function ContactLocation() {
           >
             <Mail className="size-5 shrink-0" />
             dlflyoverseas@gmail.com
+          </a>
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow DLFLY Overseas on Instagram (opens in a new tab)"
+            className="mt-3 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+          >
+            <Instagram className="size-5 shrink-0" aria-hidden="true" />
+            @dlflyoverseas
+            <ArrowUpRight className="size-4" aria-hidden="true" />
           </a>
           <p className="mt-6 text-sm leading-6 text-muted-foreground">
             Please call before visiting so we can arrange time with the right advisor.
