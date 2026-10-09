@@ -19,6 +19,7 @@ import {
   Plane,
   ShieldCheck,
   Sparkles,
+  UsersRound,
   X,
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -44,6 +45,8 @@ const whatsappLink = "https://wa.me/916304636998";
 const serviceLinks = [
   { to: "/study-abroad", title: "Study abroad", icon: GraduationCap },
   { to: "/visa", title: "Visa guidance", icon: Plane },
+  { to: "/visit-visa", title: "Visit visa", icon: Compass },
+  { to: "/dependent-visa", title: "Dependent visa", icon: UsersRound },
   { to: "/permanent-residency", title: "Permanent residency", icon: Compass },
   { to: "/education-loans", title: "Education loans", icon: CircleDollarSign },
 ] as const;
@@ -435,6 +438,36 @@ export const serviceContent = {
       "Document and checklist support",
       "Application timeline planning",
       "Interview preparation guidance",
+    ],
+  },
+  visit: {
+    eyebrow: "Visit visa",
+    title: "Plan a visit worth looking forward to.",
+    description:
+      "Prepare for holidays and visits to family or friends with a clear travel plan and an organised application checklist.",
+    icon: Compass,
+    intro:
+      "A well-prepared visit starts with the purpose of your trip, where you will stay and how you will cover your costs. We help you organise these details around your destination’s official visitor requirements, so your application explains your plans clearly.",
+    points: [
+      "Travel purpose and itinerary planning",
+      "Visitor document checklist support",
+      "Invitation and funding preparation",
+      "Appointment and submission planning",
+    ],
+  },
+  dependent: {
+    eyebrow: "Dependent visa",
+    title: "Prepare for your next chapter together.",
+    description:
+      "Organise the documents and next steps for joining your partner or family abroad, guided by the requirements for their visa route.",
+    icon: UsersRound,
+    intro:
+      "Joining family abroad involves connecting your relationship records with the main applicant’s immigration status and the destination’s rules. We help you organise the information, prepare questions about the appropriate route and coordinate the family’s application steps.",
+    points: [
+      "Family route preparation",
+      "Relationship document organisation",
+      "Main applicant and funding checklist",
+      "Family application timeline planning",
     ],
   },
   residency: {
@@ -910,6 +943,18 @@ export function HomePage() {
       to: "/visa",
     },
     {
+      icon: Compass,
+      title: "Visit visa",
+      text: "Prepare your travel plans and visitor application.",
+      to: "/visit-visa",
+    },
+    {
+      icon: UsersRound,
+      title: "Dependent visa",
+      text: "Plan the next steps to join your family abroad.",
+      to: "/dependent-visa",
+    },
+    {
       icon: BriefcaseBusiness,
       title: "Permanent residency",
       text: "Explore pathways and plan your preparation.",
@@ -995,12 +1040,12 @@ export function HomePage() {
             Talk to our team <ArrowRight className="size-4" />
           </Link>
         </div>
-        <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map(({ icon: Icon, title, text, to }, index) => (
             <Link
               key={title}
               to={to}
-              className={`brand-service-card group overflow-hidden rounded-2xl p-5 transition-shadow hover:shadow-lg ${["brand-dark", "brand-red", "brand-cool", "brand-gold"][index]}`}
+              className={`brand-service-card group overflow-hidden rounded-2xl p-5 transition-shadow hover:shadow-lg ${["brand-dark", "brand-red", "brand-cool", "brand-gold"][index % 4]}`}
             >
               <div className="flex items-center justify-between">
                 <span className="grid size-10 place-items-center rounded-full bg-secondary text-primary">

@@ -30,6 +30,8 @@ export const publicPaths = [
   "/",
   "/study-abroad",
   "/visa",
+  "/visit-visa",
+  "/dependent-visa",
   "/permanent-residency",
   "/education-loans",
   "/about",

@@ -31,6 +31,38 @@ export const servicePresentation = {
       "Where an interview is required, practise explaining your plans clearly and truthfully.",
     ],
   },
+  visit: {
+    image: "/images/service-visit-visa.jpg",
+    imageAlt: "Couple exploring a European city together during a visit abroad",
+    overviewTitle: "Turn your travel plans into a clear application.",
+    startingPoints: [
+      "Your destination and reason for visiting",
+      "Your travel dates and accommodation plans",
+      "Who will fund the trip or host your visit",
+    ],
+    support: [
+      "Bring your intended activities, travel dates and accommodation plans into a consistent itinerary.",
+      "Organise passport, identity and supporting records against the destination’s official visitor checklist.",
+      "Prepare the host, invitation and financial information requested for your circumstances.",
+      "Coordinate the application form, any required appointment and document submission around your travel timeline.",
+    ],
+  },
+  dependent: {
+    image: "/images/service-dependent-visa.jpg",
+    imageAlt: "Family reuniting beside their luggage in a bright airport arrivals hall",
+    overviewTitle: "Bring your family’s preparation together.",
+    startingPoints: [
+      "Your relationship to the main applicant",
+      "Their destination and visa or immigration status",
+      "Your family’s documents and intended timeline",
+    ],
+    support: [
+      "Identify the official family or dependant route to research based on the main applicant’s status.",
+      "Organise relationship and identity records, including any translations requested by the authority.",
+      "Connect the main applicant’s status documents with the funding and accommodation evidence requested for the family.",
+      "Keep each family member’s application, appointments and outstanding documents in one practical schedule.",
+    ],
+  },
   residency: {
     image: "/images/service-residency.jpg",
     imageAlt: "Couple arriving at a new home with a suitcase and moving box",

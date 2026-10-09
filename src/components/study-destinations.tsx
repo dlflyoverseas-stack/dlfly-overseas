@@ -1,9 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import {
-  destinationEnquiryLink,
-  europeanStudyDestinations,
-  otherStudyDestinations,
-} from "@/data/study-destinations";
+import { destinationEnquiryLink, studyDestinations } from "@/data/study-destinations";
 
 function DestinationLink({ code, name }: { code: string; name: string }) {
   return (
@@ -47,23 +43,15 @@ export function StudyDestinations() {
           id="study-destinations-heading"
           className="font-display text-2xl font-extrabold leading-tight sm:text-3xl"
         >
-          Explore study destinations in Europe
+          Explore your study destinations
         </h2>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground sm:text-base">
           Choose a country to discuss your course interests, application preparation and next steps
           with our team.
         </p>
-        <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {europeanStudyDestinations.map((destination) => (
-            <li key={destination.code} className="min-w-0 last:col-span-2 sm:last:col-span-1">
-              <DestinationLink {...destination} />
-            </li>
-          ))}
-        </ul>
-        <h3 className="mb-3 mt-6 text-sm font-bold">More study destinations</h3>
-        <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          {otherStudyDestinations.map((destination) => (
-            <li key={destination.code} className="min-w-0">
+        <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          {studyDestinations.map((destination) => (
+            <li key={destination.code} className="min-w-0 lg:[&:nth-last-child(-n+2)]:col-span-2">
               <DestinationLink {...destination} />
             </li>
           ))}

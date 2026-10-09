@@ -1,4 +1,9 @@
-export const europeanStudyDestinations = [
+export const studyDestinations = [
+  { code: "gb", name: "United Kingdom" },
+  { code: "us", name: "United States" },
+  { code: "ca", name: "Canada" },
+  { code: "au", name: "Australia" },
+  { code: "nz", name: "New Zealand" },
   { code: "sk", name: "Slovakia" },
   { code: "ie", name: "Ireland" },
   { code: "de", name: "Germany" },
@@ -8,13 +13,6 @@ export const europeanStudyDestinations = [
   { code: "at", name: "Austria" },
   { code: "ch", name: "Switzerland" },
   { code: "mt", name: "Malta" },
-] as const;
-
-export const otherStudyDestinations = [
-  { code: "gb", name: "United Kingdom" },
-  { code: "us", name: "United States" },
-  { code: "ca", name: "Canada" },
-  { code: "au", name: "Australia" },
 ] as const;
 
 export function destinationEnquiryLink(country: string) {

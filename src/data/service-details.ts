@@ -105,6 +105,112 @@ export const serviceDetails = {
       ],
     ],
   },
+  visit: {
+    heading: "From your travel idea to a prepared application",
+    introduction:
+      "Connect your reason for visiting with a practical itinerary, supporting documents and the official application steps for your destination.",
+    process: [
+      [
+        "Discuss your visit",
+        "Share your destination, travel dates and whether you are planning a holiday or visiting family or friends. Start with the details that explain your trip.",
+      ],
+      [
+        "Check the official visitor route",
+        "Review the destination’s official visitor guidance for your nationality and planned activities before organising the application checklist.",
+      ],
+      [
+        "Organise your itinerary",
+        "Bring intended travel dates, accommodation, planned activities and host details together. Keep these details consistent across your application.",
+      ],
+      [
+        "Prepare supporting records",
+        "Gather identity, funding and other evidence requested for your circumstances. Include invitation or sponsor information when the official checklist requires it.",
+      ],
+      [
+        "Prepare the submission",
+        "Check the form against your documents and plan any required appointment or biometrics. Keep copies of what you submit and note the official deadlines.",
+      ],
+      [
+        "Follow up and plan your departure",
+        "Track the application through official channels. After a decision, review your permission and entry conditions before finalising your travel arrangements.",
+      ],
+    ],
+    checklist: [
+      "Passport and identity records",
+      "Purpose of visit and intended travel dates",
+      "Accommodation and itinerary information",
+      "Host or invitation details, where requested",
+      "Evidence of trip funding and other requested supporting records",
+      "The destination’s current visitor checklist and appointment details",
+    ],
+    faqs: [
+      [
+        "Can you help with a holiday or a family visit?",
+        "Yes. We help organise the travel plan and supporting information for visitor preparation. The appropriate route depends on your destination and planned activities.",
+      ],
+      [
+        "Should I book travel before applying?",
+        "Follow the authority’s instructions about itinerary evidence and bookings. Discuss the application timeline before making non-refundable travel commitments.",
+      ],
+      [
+        "How long will the application take?",
+        "Processing times and appointment availability differ. Use the authority’s current published information to plan your timeline; a decision date or approval cannot be promised.",
+      ],
+    ],
+  },
+  dependent: {
+    heading: "A coordinated plan for joining your family",
+    introduction:
+      "Bring the main applicant’s information, family records and each person’s preparation into one schedule, starting with the official requirements for the relevant route.",
+    process: [
+      [
+        "Understand your family’s plans",
+        "Discuss who is joining whom, the destination and your intended timeline. Identify the main applicant’s visa or immigration status and the information already available.",
+      ],
+      [
+        "Research the appropriate family route",
+        "Check the authority’s current guidance for dependants under the main applicant’s route. Identify any eligibility questions that need advice from an appropriately qualified professional.",
+      ],
+      [
+        "Organise relationship evidence",
+        "Gather identity and family relationship records requested for the application, such as marriage or birth records. Note any translation or certification instructions.",
+      ],
+      [
+        "Connect the supporting information",
+        "Bring together the main applicant’s status records and the financial, accommodation or other information specified by the official checklist.",
+      ],
+      [
+        "Coordinate each application",
+        "Keep each family member’s forms, documents, reference details and any required appointments organised. Review the sequence for applying together or separately.",
+      ],
+      [
+        "Prepare for the next steps together",
+        "Follow official status updates and requests. After a decision, review the permission and arrival requirements for each family member before arranging the move.",
+      ],
+    ],
+    checklist: [
+      "Passports and identity records for each applicant",
+      "The main applicant’s visa or immigration status information",
+      "Relationship documents requested for the route",
+      "Funding and accommodation records, where required",
+      "Translations or certifications specified by the authority",
+      "Application references, appointments and intended family timeline",
+    ],
+    faqs: [
+      [
+        "Can every visa holder bring dependants?",
+        "Family options depend on the destination and the main applicant’s route. Check the current official requirements before preparing an application, and seek qualified advice for case-specific eligibility questions.",
+      ],
+      [
+        "Can family members apply together?",
+        "The application sequence varies by route. We help organise the official instructions and keep each family member’s documents and dates connected.",
+      ],
+      [
+        "What should we bring to the first conversation?",
+        "Bring the destination, main applicant’s status details, relationship information, intended dates and any checklist or application records you already have.",
+      ],
+    ],
+  },
   residency: {
     heading: "Explore the preparation behind a long-term move",
     introduction:

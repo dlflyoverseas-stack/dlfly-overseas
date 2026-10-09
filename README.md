@@ -1,6 +1,6 @@
 # DLFLY Overseas
 
-React and TanStack Start website for study abroad, visa guidance, permanent residency orientation and education finance. Service pages include preparation steps, checklists and FAQs. The public interface combines deep navy, red and gold with warm neutral backgrounds, full-width hero images and solid text panels. Shared colour surfaces in `src/styles.css` keep text and controls readable across the country tiles, service cards, process sections and contact areas. The Framer Motion mobile menu overlays the hero. Articles, gallery images, YouTube videos and site settings are managed through Firebase at `/admin`.
+React and TanStack Start website for study abroad, visa guidance, visit visas, dependent visas, permanent residency orientation and education finance. Service pages include preparation steps, checklists and FAQs. The public interface combines deep navy, red and gold with warm neutral backgrounds, full-width hero images and solid text panels. Shared colour surfaces in `src/styles.css` keep text and controls readable across the country tiles, service cards, process sections and contact areas. The Framer Motion mobile menu overlays the hero. Articles, gallery images, YouTube videos and site settings are managed through Firebase at `/admin`.
 
 Enquiries: +91 6304636998 and dlflyoverseas@gmail.com. The footer credits [Octaleads](https://www.octaleads.com).
 
@@ -15,7 +15,9 @@ bun run dev
 
 Shared brochure presentation lives in `src/components/dlfly-site.tsx`. Public pages use file-based routes and server-render published Firestore content. Visible pages refresh content every minute and when the browser window regains focus. Unpublished records are accessible only to the approved admin.
 
-The homepage and Study Abroad page share `StudyDestinations`, with European countries defined in `src/data/study-destinations.ts`. Country links open a WhatsApp enquiry with the selected country. National flag SVGs in `public/images/flags/` are downloaded from [Flagcdn](https://flagcdn.com/) using its [documented ISO country codes](https://flagpedia.net/download/api), based on Wikimedia Commons vectors. Flags retain their original proportions and are country identifiers, not government endorsements or university partnership logos.
+The homepage and Study Abroad page share `StudyDestinations`, with all countries defined in `src/data/study-destinations.ts`. United Kingdom, United States, Canada, Australia and New Zealand appear first, followed by the European destinations. Country links open a WhatsApp enquiry with the selected country. National flag SVGs in `public/images/flags/` are downloaded from [Flagcdn](https://flagcdn.com/) using its [documented ISO country codes](https://flagpedia.net/download/api), based on Wikimedia Commons vectors. Flags retain their original proportions and are country identifiers, not government endorsements or university partnership logos.
+
+Visit Visa (`/visit-visa`) and Dependent Visa (`/dependent-visa`) each use the shared service layout, with their own hero photo, preparation steps, checklist and FAQs. General preparation content follows official visitor and dependant guidance, including [GOV.UK visitor information](https://www.gov.uk/standard-visitor) and [GOV.UK dependant information](https://www.gov.uk/student-visa/family-members); route-specific eligibility and document requirements must be checked with the relevant authority.
 
 ## Firebase and administration
 
