@@ -1061,7 +1061,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="brand-red">
+      <section className="brand-journey">
         <div className="mx-auto grid max-w-7xl gap-9 px-5 py-12 sm:px-6 sm:py-14 md:grid-cols-[0.85fr_1.15fr] md:items-center">
           <div>
             <SectionLabel>A more considered journey</SectionLabel>

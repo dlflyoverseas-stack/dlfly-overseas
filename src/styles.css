@@ -156,7 +156,8 @@
 }
 
 .brand-dark,
-.brand-red {
+.brand-red,
+.brand-journey {
   --background: var(--brand-ink);
   --foreground: oklch(0.99 0.003 85);
   --card: var(--brand-ink-raised);
@@ -180,6 +181,16 @@
   --muted-foreground: oklch(0.93 0.015 25);
   --secondary: oklch(0.48 0.15 25);
   --border: oklch(0.62 0.095 25);
+}
+
+.brand-journey {
+  --background: oklch(0.34 0.045 245);
+  --card: oklch(0.4 0.042 245);
+  --muted: var(--card);
+  --muted-foreground: oklch(0.9 0.012 245);
+  --secondary: oklch(0.44 0.04 245);
+  --border: oklch(0.54 0.025 245);
+  --brand-gold: oklch(0.86 0.07 85);
 }
 
 .brand-cool {
