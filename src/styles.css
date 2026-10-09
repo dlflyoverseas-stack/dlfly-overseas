@@ -191,6 +191,34 @@
   --secondary: oklch(0.44 0.04 245);
   --border: oklch(0.54 0.025 245);
   --brand-gold: oklch(0.86 0.07 85);
+  background-image:
+    linear-gradient(
+      100deg,
+      var(--background) 12%,
+      oklch(0.34 0.045 245 / 88%) 40%,
+      oklch(0.3 0.05 250 / 25%) 100%
+    ),
+    url("/images/journey-gradient.svg"),
+    linear-gradient(120deg, var(--background) 35%, oklch(0.34 0.07 265), oklch(0.4 0.065 225));
+  background-position:
+    center,
+    right center,
+    center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 767px) {
+  .brand-journey {
+    background-image:
+      linear-gradient(180deg, oklch(0.34 0.045 245 / 94%) 30%, oklch(0.3 0.05 250 / 62%) 100%),
+      url("/images/journey-gradient.svg"),
+      linear-gradient(150deg, var(--background), oklch(0.34 0.07 265), oklch(0.4 0.065 225));
+    background-position:
+      center,
+      65% center,
+      center;
+  }
 }
 
 .brand-cool {
