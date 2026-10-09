@@ -254,6 +254,20 @@
   background-color: var(--background);
 }
 
+.service-overview {
+  background-color: #dedee3;
+  background-image: url("/images/service-overview-aws.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 767px) {
+  .service-overview {
+    background-position: right center;
+  }
+}
+
 .brand-gold {
   --background: oklch(0.91 0.095 85);
   --muted: oklch(0.945 0.05 85);

@@ -19,6 +19,8 @@ The homepage and Study Abroad page share `StudyDestinations`, with all countries
 
 Public page sections and the footer share gold borders, curved corners and responsive side gutters through `.site-public` section variables in `src/styles.css`. Inner containers retain comfortable reading widths. Top-level animated sections use the `site-section` class; the mobile menu overlays the framed hero, with photos remaining above the copy on phones and tablets.
 
+Service Overview sections use the unchanged background image from the [AWS homepage hero](https://aws.amazon.com/), saved locally as `public/images/service-overview-aws.png` at the user's request. The [original AWS asset](https://d1.awsstatic.com/onedam/marketing-channels/website/aws/en_US/homepage/hero/cloud-capablilities-2.c6901489b1b64b289e0c7eee10a2bba93165573b.png) was retrieved on 9 October 2026. Translucent content panels maintain text contrast over the illustration.
+
 Visit Visa (`/visit-visa`) and Dependent Visa (`/dependent-visa`) each use the shared service layout, with their own hero photo, preparation steps, checklist and FAQs. General preparation content follows official visitor and dependant guidance, including [GOV.UK visitor information](https://www.gov.uk/standard-visitor) and [GOV.UK dependant information](https://www.gov.uk/student-visa/family-members); route-specific eligibility and document requirements must be checked with the relevant authority.
 
 ## Firebase and administration

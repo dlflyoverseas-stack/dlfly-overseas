@@ -588,9 +588,9 @@ export function ServicePage({ service }: { service: ServiceKey }) {
           ))}
         </div>
       </nav>
-      <section id="service-overview" className="brand-cool scroll-mt-28 border-b border-border">
+      <section id="service-overview" className="brand-cool service-overview scroll-mt-28">
         <div className="mx-auto grid max-w-7xl gap-7 px-5 py-9 sm:px-6 sm:py-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12">
-          <div>
+          <div className="rounded-2xl border border-white/70 bg-white/80 p-5 backdrop-blur-sm sm:p-6">
             <SectionLabel>Overview</SectionLabel>
             <h2 className="max-w-2xl font-display text-2xl font-extrabold leading-tight sm:text-3xl">
               {presentation.overviewTitle}
@@ -600,7 +600,7 @@ export function ServicePage({ service }: { service: ServiceKey }) {
             </p>
           </div>
           <aside
-            className="rounded-xl border border-border bg-muted p-5 sm:p-6"
+            className="rounded-2xl border border-white/70 bg-white/80 p-5 backdrop-blur-sm sm:p-6"
             aria-label="Your first conversation"
           >
             <h3 className="font-display text-base font-extrabold">Start with your goals</h3>
