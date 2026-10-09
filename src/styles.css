@@ -295,7 +295,46 @@
   border-top: 4px solid var(--brand-gold);
 }
 .site-footer {
-  border-top: 1px solid oklch(0.48 0.035 260);
+  --foreground: var(--brand-ink);
+  --primary-foreground: var(--brand-ink);
+  --muted-foreground: oklch(0.35 0.035 260);
+  --secondary: var(--brand-ink);
+  --secondary-foreground: oklch(0.99 0.003 85);
+  --border: oklch(0.58 0.06 260 / 20%);
+  --ring: var(--brand-ink);
+  background-color: oklch(0.9 0.04 265);
+  background-image:
+    linear-gradient(
+      100deg,
+      oklch(0.96 0.018 280 / 97%) 5%,
+      oklch(0.94 0.02 270 / 88%) 55%,
+      oklch(0.9 0.04 260 / 55%) 100%
+    ),
+    url("/images/footer-gradient.svg"),
+    linear-gradient(120deg, oklch(0.93 0.026 280), oklch(0.81 0.08 260));
+  background-position:
+    center,
+    right center,
+    center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: var(--foreground);
+  border-top: 1px solid oklch(0.67 0.04 260);
+}
+.footer-legal {
+  background-color: oklch(0.985 0.006 260 / 75%);
+}
+@media (max-width: 767px) {
+  .site-footer {
+    background-image:
+      linear-gradient(180deg, oklch(0.96 0.018 280 / 92%), oklch(0.92 0.035 260 / 85%)),
+      url("/images/footer-gradient.svg"),
+      linear-gradient(120deg, oklch(0.93 0.026 280), oklch(0.81 0.08 260));
+    background-position:
+      center,
+      75% center,
+      center;
+  }
 }
 
 .dark {

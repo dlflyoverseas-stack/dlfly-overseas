@@ -237,13 +237,13 @@ export function SiteFooter() {
   const [ready, setReady] = useState(false);
   useEffect(() => setReady(true), []);
   return (
-    <footer className="site-footer bg-brand-ink text-white">
+    <footer className="site-footer">
       <div className="mx-auto grid max-w-7xl gap-5 px-5 py-6 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr] md:gap-8 md:py-10">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 md:block">
           <Link to="/" className="inline-flex items-center gap-3" aria-label="DLFLY Overseas home">
-            <SiteBrand light />
+            <SiteBrand />
           </Link>
-          <p className="mt-3 hidden max-w-sm text-sm leading-6 text-primary-foreground/75 md:block">
+          <p className="mt-3 hidden max-w-sm text-sm leading-6 text-muted-foreground md:block">
             Thoughtful guidance for your journey to study, work and build a future abroad.
           </p>
           <a
@@ -251,7 +251,7 @@ export function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Follow DLFLY Overseas on Instagram (opens in a new tab)"
-            className="mt-1 inline-flex min-h-11 items-center gap-2 text-sm text-primary-foreground/75 transition-colors hover:text-primary-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-foreground md:mt-2"
+            className="mt-1 inline-flex min-h-11 items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground md:mt-2"
           >
             <Instagram className="size-4 shrink-0" aria-hidden="true" /> Instagram
             <ArrowUpRight className="size-3.5" aria-hidden="true" />
@@ -261,13 +261,13 @@ export function SiteFooter() {
           <h2 className="mb-1 text-xs font-bold uppercase tracking-wider md:mb-2">Services</h2>
           <nav
             aria-label="Footer services"
-            className="grid grid-cols-2 gap-x-3 text-sm text-primary-foreground/75 md:grid-cols-1"
+            className="grid grid-cols-2 gap-x-3 text-sm text-muted-foreground md:grid-cols-1"
           >
             {serviceLinks.map(({ to, title }) => (
               <Link
                 key={to}
                 to={to}
-                className="inline-flex min-h-10 items-center hover:text-primary-foreground"
+                className="inline-flex min-h-10 items-center hover:text-foreground"
               >
                 {title}
               </Link>
@@ -284,7 +284,7 @@ export function SiteFooter() {
           >
             <Phone className="size-3.5 shrink-0 md:size-4" /> {phoneNumber}
           </a>
-          <p className="mt-2 hidden text-sm text-primary-foreground/70 md:block">
+          <p className="mt-2 hidden text-sm text-muted-foreground md:block">
             Call us to start a conversation.
           </p>
           <Button
@@ -298,8 +298,8 @@ export function SiteFooter() {
           </Button>
         </div>
       </div>
-      <div className="border-t border-primary-foreground/20">
-        <div className="mx-auto flex max-w-7xl flex-col gap-0 px-5 py-2 text-[11px] leading-4 text-primary-foreground/70 sm:px-6 md:flex-row md:flex-wrap md:items-center md:gap-x-6 md:py-3 md:text-xs">
+      <div className="footer-legal border-t border-border">
+        <div className="mx-auto flex max-w-7xl flex-col gap-0 px-5 py-2 text-[11px] leading-4 text-muted-foreground sm:px-6 md:flex-row md:flex-wrap md:items-center md:gap-x-6 md:py-3 md:text-xs">
           <span>© {new Date().getFullYear()} DLFLY Overseas. All rights reserved.</span>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-0">
             <Link to="/privacy" className="inline-flex min-h-8 items-center">
@@ -322,7 +322,7 @@ export function SiteFooter() {
               href="https://www.octaleads.com"
               target="_blank"
               rel="noreferrer"
-              className="font-semibold text-primary-foreground underline underline-offset-4"
+              className="font-semibold text-foreground underline underline-offset-4"
             >
               Octaleads
             </a>
