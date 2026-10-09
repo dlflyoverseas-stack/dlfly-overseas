@@ -238,7 +238,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-[#19191c] text-primary-foreground">
       <div className="mx-auto grid max-w-7xl gap-5 px-5 py-6 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr] md:gap-8 md:py-10">
-        <div>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 md:block">
           <Link to="/" className="inline-flex items-center gap-3" aria-label="DLFLY Overseas home">
             <SiteBrand light />
           </Link>
