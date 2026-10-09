@@ -6,9 +6,9 @@ export function ServiceProcess({ service }: { service: keyof typeof serviceDetai
   const detail = serviceDetails[service];
   return (
     <>
-      <section id="service-process" className="brand-dark scroll-mt-28">
+      <section id="service-process" className="brand-cool service-process-background scroll-mt-28">
         <div className="mx-auto max-w-7xl px-5 py-9 sm:px-6 sm:py-12">
-          <Reveal>
+          <Reveal className="max-w-4xl rounded-2xl border border-white/70 bg-white/90 p-5 backdrop-blur-sm sm:p-6">
             <p className="text-xs font-bold uppercase tracking-widest text-primary">
               Your process, step by step
             </p>
@@ -24,7 +24,7 @@ export function ServiceProcess({ service }: { service: keyof typeof serviceDetai
               <Reveal
                 key={title}
                 delay={(index % 3) * 0.06}
-                className="brand-journey-card rounded-xl border border-border bg-card p-5 sm:p-6"
+                className="brand-dark brand-journey-card rounded-xl border border-border bg-card p-5 sm:p-6"
               >
                 <span className="inline-flex size-9 items-center justify-center rounded-full bg-secondary text-sm font-extrabold text-primary">
                   0{index + 1}

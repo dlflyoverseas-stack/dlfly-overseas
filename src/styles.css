@@ -254,7 +254,8 @@
   background-color: var(--background);
 }
 
-.service-overview {
+.service-overview,
+.service-process-background {
   background-color: #dedee3;
   background-image: url("/images/service-overview-aws.png");
   background-position: center;
@@ -263,7 +264,8 @@
 }
 
 @media (max-width: 767px) {
-  .service-overview {
+  .service-overview,
+  .service-process-background {
     background-position: right center;
   }
 }
