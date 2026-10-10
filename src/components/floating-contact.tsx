@@ -16,23 +16,14 @@ export function FloatingContact() {
   const [open, setOpen] = useState(false);
   const [footerContactVisible, setFooterContactVisible] = useState(false);
   const [contactFormVisible, setContactFormVisible] = useState(false);
-  const [mobile, setMobile] = useState(false);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const reduced = useReducedMotion();
   useEffect(() => {
     const footerContact = document.getElementById("footer-contact-actions");
     const contactForm = document.getElementById("contact-form");
-    const viewport = window.matchMedia("(max-width: 639px)");
     let active = true;
-    let formVisible = false;
-    const updateViewport = () => {
-      setMobile(viewport.matches);
-      if (viewport.matches && formVisible) setOpen(false);
-    };
-    updateViewport();
     setContactFormVisible(false);
     setFooterContactVisible(false);
-    viewport.addEventListener("change", updateViewport);
     const observer =
       "IntersectionObserver" in window
         ? new IntersectionObserver(
@@ -42,9 +33,8 @@ export function FloatingContact() {
                 if (entry.target === footerContact)
                   setFooterContactVisible(entry.isIntersecting && entry.intersectionRatio >= 1);
                 if (entry.target === contactForm) {
-                  formVisible = entry.isIntersecting;
-                  setContactFormVisible(formVisible);
-                  if (viewport.matches && formVisible) setOpen(false);
+                  setContactFormVisible(entry.isIntersecting);
+                  if (entry.isIntersecting) setOpen(false);
                 }
               }
             },
@@ -56,12 +46,11 @@ export function FloatingContact() {
     return () => {
       active = false;
       observer?.disconnect();
-      viewport.removeEventListener("change", updateViewport);
     };
   }, [pathname]);
   return (
     <div
-      className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex-col items-end gap-3 sm:right-6 ${(mobile && contactFormVisible) || (footerContactVisible && !open) ? "hidden" : "flex"}`}
+      className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex-col items-end gap-3 sm:right-6 ${contactFormVisible || (footerContactVisible && !open) ? "hidden" : "flex"}`}
     >
       <AnimatePresence>
         {open && (
