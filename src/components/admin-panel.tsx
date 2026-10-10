@@ -34,9 +34,10 @@ import {
 } from "@/lib/content";
 import { useSiteSettings } from "@/context/site-settings";
 import { SiteBrand } from "./site-brand";
+import { EnquiriesManager } from "./enquiries-manager";
 import { initialArticles, initialGallery } from "@/data/initial-content";
 
-type Tab = CollectionName | "settings";
+type Tab = CollectionName | "enquiries" | "settings";
 type Values = Record<string, string | boolean>;
 type Item = { id: string; title: string; published: boolean; [key: string]: unknown };
 const emptyValues: Record<CollectionName, Values> = {
@@ -589,8 +590,8 @@ export function AdminPanel() {
             </p>
             <h1 className="mt-3 font-display text-3xl font-extrabold">Welcome back.</h1>
             <p className="mt-4 break-all text-sm leading-7 text-muted-foreground">
-              Sign in with the verified Google account {ADMIN_EMAIL} to manage articles, gallery
-              images, videos and website settings.
+              Sign in with the verified Google account {ADMIN_EMAIL} to manage enquiries, articles,
+              gallery images, videos and website settings.
             </p>
             {!firebaseConfigured && (
               <p role="status" className="mt-5 rounded-md bg-muted p-4 text-sm">
@@ -627,7 +628,7 @@ export function AdminPanel() {
               aria-label="Admin sections"
               className="my-8 flex flex-wrap gap-2 border-b border-border pb-4"
             >
-              {(["articles", "gallery", "videos", "settings"] as const).map((item) => (
+              {(["enquiries", "articles", "gallery", "videos", "settings"] as const).map((item) => (
                 <button
                   key={item}
                   onClick={() => setTab(item)}
@@ -638,31 +639,39 @@ export function AdminPanel() {
                 </button>
               ))}
             </nav>
-            <details className="mb-8 rounded-lg border border-border p-4">
-              <summary className="cursor-pointer font-semibold">Starter content</summary>
-              <p className="my-3 text-sm leading-6 text-muted-foreground">
-                Add the prepared study, visa and finance articles and illustrative gallery images.
-                Existing items are preserved.
-              </p>
-              <button
-                onClick={addStarterContent}
-                disabled={busy}
-                className="min-h-11 rounded-md bg-secondary px-4 text-sm font-semibold"
-              >
-                {busy ? "Adding…" : "Add starter articles and gallery"}
-              </button>
-              {starterNotice && (
-                <p role="status" className="mt-3 text-sm">
-                  {starterNotice}
+            {tab !== "enquiries" && (
+              <details className="mb-8 rounded-lg border border-border p-4">
+                <summary className="cursor-pointer font-semibold">Starter content</summary>
+                <p className="my-3 text-sm leading-6 text-muted-foreground">
+                  Add the prepared study, visa and finance articles and illustrative gallery images.
+                  Existing items are preserved.
                 </p>
-              )}
-            </details>
+                <button
+                  onClick={addStarterContent}
+                  disabled={busy}
+                  className="min-h-11 rounded-md bg-secondary px-4 text-sm font-semibold"
+                >
+                  {busy ? "Adding…" : "Add starter articles and gallery"}
+                </button>
+                {starterNotice && (
+                  <p role="status" className="mt-3 text-sm">
+                    {starterNotice}
+                  </p>
+                )}
+              </details>
+            )}
             {error && (
               <p role="alert" className="mb-5 text-sm text-destructive">
                 {error}
               </p>
             )}
-            {tab === "settings" ? <SettingsManager /> : <ContentManager key={tab} tab={tab} />}
+            {tab === "enquiries" ? (
+              <EnquiriesManager />
+            ) : tab === "settings" ? (
+              <SettingsManager />
+            ) : (
+              <ContentManager key={tab} tab={tab} />
+            )}
           </>
         )}
       </main>

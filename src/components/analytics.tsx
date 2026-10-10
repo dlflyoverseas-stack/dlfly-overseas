@@ -144,7 +144,19 @@ export function Analytics() {
       }
     };
     document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
+    const onEnquiry = () => {
+      if (ga4Id)
+        window.gtag?.("event", "generate_lead", {
+          send_to: ga4Id,
+          page_path: pathname,
+        });
+      if (clarityId) window.clarity?.("event", "enquiry_submitted");
+    };
+    window.addEventListener("dlfly-enquiry-submitted", onEnquiry);
+    return () => {
+      document.removeEventListener("click", onClick);
+      window.removeEventListener("dlfly-enquiry-submitted", onEnquiry);
+    };
   }, [clarityId, consent, ga4Id, loaded, pathname]);
   function choose(value: string) {
     try {

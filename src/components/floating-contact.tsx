@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Mail, Phone, X } from "lucide-react";
 import { SiteBrand } from "./site-brand";
@@ -14,21 +15,53 @@ function WhatsAppIcon() {
 export function FloatingContact() {
   const [open, setOpen] = useState(false);
   const [footerContactVisible, setFooterContactVisible] = useState(false);
+  const [contactFormVisible, setContactFormVisible] = useState(false);
+  const [mobile, setMobile] = useState(false);
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
   const reduced = useReducedMotion();
   useEffect(() => {
     const footerContact = document.getElementById("footer-contact-actions");
-    if (!footerContact || !("IntersectionObserver" in window)) return;
-    const observer = new IntersectionObserver(
-      ([entry]) =>
-        setFooterContactVisible(Boolean(entry?.isIntersecting && entry.intersectionRatio >= 1)),
-      { threshold: [0, 1] },
-    );
-    observer.observe(footerContact);
-    return () => observer.disconnect();
-  }, []);
+    const contactForm = document.getElementById("contact-form");
+    const viewport = window.matchMedia("(max-width: 639px)");
+    let active = true;
+    let formVisible = false;
+    const updateViewport = () => {
+      setMobile(viewport.matches);
+      if (viewport.matches && formVisible) setOpen(false);
+    };
+    updateViewport();
+    setContactFormVisible(false);
+    setFooterContactVisible(false);
+    viewport.addEventListener("change", updateViewport);
+    const observer =
+      "IntersectionObserver" in window
+        ? new IntersectionObserver(
+            (entries) => {
+              if (!active) return;
+              for (const entry of entries) {
+                if (entry.target === footerContact)
+                  setFooterContactVisible(entry.isIntersecting && entry.intersectionRatio >= 1);
+                if (entry.target === contactForm) {
+                  formVisible = entry.isIntersecting;
+                  setContactFormVisible(formVisible);
+                  if (viewport.matches && formVisible) setOpen(false);
+                }
+              }
+            },
+            { threshold: [0, 1] },
+          )
+        : undefined;
+    if (footerContact) observer?.observe(footerContact);
+    if (contactForm) observer?.observe(contactForm);
+    return () => {
+      active = false;
+      observer?.disconnect();
+      viewport.removeEventListener("change", updateViewport);
+    };
+  }, [pathname]);
   return (
     <div
-      className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex-col items-end gap-3 sm:right-6 ${footerContactVisible && !open ? "hidden" : "flex"}`}
+      className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex-col items-end gap-3 sm:right-6 ${(mobile && contactFormVisible) || (footerContactVisible && !open) ? "hidden" : "flex"}`}
     >
       <AnimatePresence>
         {open && (
@@ -68,24 +101,26 @@ export function FloatingContact() {
           </motion.aside>
         )}
       </AnimatePresence>
-      <button
-        aria-label={open ? "Hide DLFLY contact options" : "Open DLFLY contact options"}
-        aria-expanded={open}
-        onClick={() => setOpen(!open)}
-        className="rounded-full bg-card p-2 shadow-lg ring-1 ring-border"
-      >
-        <SiteBrand compact />
-      </button>
-      <a
-        href="https://wa.me/916304636998?text=Hello%20DLFLY%20Overseas%2C%20I%20would%20like%20to%20discuss%20my%20plans."
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat with DLFLY Overseas on WhatsApp"
-        className="flex min-h-14 min-w-14 items-center justify-center gap-2 rounded-full bg-[#128c4a] px-4 text-white shadow-lg transition-colors hover:bg-[#087a3d] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-      >
-        <WhatsAppIcon />
-        <span className="hidden text-sm font-bold sm:inline">Chat with us</span>
-      </a>
+      <div className="flex items-center gap-2 sm:flex-col sm:items-end sm:gap-3">
+        <button
+          aria-label={open ? "Hide DLFLY contact options" : "Open DLFLY contact options"}
+          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+          className="rounded-full bg-card p-2 shadow-lg ring-1 ring-border"
+        >
+          <SiteBrand compact />
+        </button>
+        <a
+          href="https://wa.me/916304636998?text=Hello%20DLFLY%20Overseas%2C%20I%20would%20like%20to%20discuss%20my%20plans."
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat with DLFLY Overseas on WhatsApp"
+          className="flex min-h-14 min-w-14 items-center justify-center gap-2 rounded-full bg-[#128c4a] px-4 text-white shadow-lg transition-colors hover:bg-[#087a3d] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+        >
+          <WhatsAppIcon />
+          <span className="hidden text-sm font-bold sm:inline">Chat with us</span>
+        </a>
+      </div>
     </div>
   );
 }

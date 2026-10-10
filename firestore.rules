@@ -38,6 +38,20 @@ service cloud.firestore {
         && data.youtubeUrl.matches('^(https://((www|m)\\.)?(youtube\\.com|youtube-nocookie\\.com|youtu\\.be)/[^ ]+|[a-zA-Z0-9_-]{11})$')
         && text(data, 'description', 0, 1000) && data.published is bool && timestamps(data);
     }
+    function enquiry(data) {
+      return data.keys().hasOnly(['name', 'email', 'phone', 'service', 'country', 'message', 'consent', 'sourcePath', 'status', 'notes', 'createdAt', 'updatedAt'])
+        && data.keys().hasAll(['name', 'email', 'phone', 'service', 'country', 'message', 'consent', 'sourcePath', 'status', 'notes', 'createdAt', 'updatedAt'])
+        && text(data, 'name', 2, 100) && data.name.matches('^\\S[\\s\\S]*\\S$')
+        && text(data, 'email', 3, 254) && data.email.matches('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$')
+        && text(data, 'phone', 7, 30) && data.phone.matches('^[+() .-]*([0-9][() .-]*){7,15}$')
+        && data['service'] in ['Study abroad', 'Visa guidance', 'Visit visa', 'Dependent visa', 'Permanent residency', 'Education finance', 'General enquiry']
+        && data.country in ['United Kingdom', 'United States', 'Canada', 'Australia', 'New Zealand', 'Slovakia', 'Ireland', 'Germany', 'France', 'Italy', 'Netherlands', 'Austria', 'Switzerland', 'Malta', 'Not decided', 'Other']
+        && text(data, 'message', 10, 2000) && data.message.matches('^\\S[\\s\\S]*\\S$')
+        && data.consent == true
+        && data.sourcePath in ['/', '/contact', '/study-abroad', '/visa', '/visit-visa', '/dependent-visa', '/permanent-residency', '/education-loans']
+        && data.status in ['new', 'contacted', 'closed']
+        && text(data, 'notes', 0, 2000) && timestamps(data);
+    }
     match /articles/{id} {
       allow get: if isAdmin() || resource.data.published == true;
       allow list: if isAdmin() || (resource.data.published == true && request.query.limit <= 100);
@@ -55,6 +69,18 @@ service cloud.firestore {
       allow list: if isAdmin() || (resource.data.published == true && request.query.limit <= 100);
       allow create, update: if isAdmin() && video(request.resource.data);
       allow delete: if isAdmin();
+    }
+    match /enquiries/{id} {
+      allow create: if enquiry(request.resource.data)
+        && request.resource.data.status == 'new'
+        && request.resource.data.notes == ''
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      allow read: if isAdmin();
+      allow update: if isAdmin() && enquiry(request.resource.data)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'notes', 'updatedAt'])
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if false;
     }
     match /settings/site {
       allow read: if true;

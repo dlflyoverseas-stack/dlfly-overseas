@@ -19,6 +19,7 @@ import {
   updateDoc,
   deleteDoc,
   setLogLevel,
+  serverTimestamp,
 } from "firebase/firestore";
 let environment: RulesTestEnvironment;
 const article = {
@@ -140,5 +141,147 @@ describe("Firestore content protection", () => {
       getDoc(doc(environment.unauthenticatedContext().firestore(), "settings", "site")),
     );
     await assertFails(setDoc(doc(admin("other@gmail.com"), "settings", "site"), settings));
+  });
+});
+
+const enquiry = {
+  name: "Asha Rao",
+  email: "asha@example.com",
+  phone: "+91 63046 36998",
+  service: "Study abroad",
+  country: "Germany",
+  message: "I would like guidance on my university application.",
+  consent: true,
+  sourcePath: "/contact",
+  status: "new",
+  notes: "",
+  createdAt: Timestamp.now(),
+  updatedAt: Timestamp.now(),
+};
+
+function publicEnquiry() {
+  return { ...enquiry, createdAt: serverTimestamp(), updatedAt: serverTimestamp() };
+}
+
+async function seedEnquiry() {
+  await environment.withSecurityRulesDisabled(async (context) => {
+    await setDoc(doc(context.firestore(), "enquiries", "test-enquiry"), enquiry);
+  });
+}
+
+describe("Firestore enquiry protection", () => {
+  it("allows a visitor to submit a valid consented enquiry with server timestamps", async () => {
+    const db = environment.unauthenticatedContext().firestore();
+    await assertSucceeds(setDoc(doc(db, "enquiries", "public-enquiry"), publicEnquiry()));
+    await assertSucceeds(
+      setDoc(doc(db, "enquiries", "general-enquiry"), {
+        ...publicEnquiry(),
+        service: "General enquiry",
+        country: "Not decided",
+        sourcePath: "/",
+      }),
+    );
+    await assertSucceeds(getDoc(doc(admin(), "enquiries", "public-enquiry")));
+  });
+
+  it("never exposes enquiry contact information to visitors or other accounts", async () => {
+    await seedEnquiry();
+    for (const db of [
+      environment.unauthenticatedContext().firestore(),
+      admin("other@gmail.com"),
+      admin(undefined, false),
+      admin(undefined, true, "password"),
+    ]) {
+      await assertFails(getDoc(doc(db, "enquiries", "test-enquiry")));
+      await assertFails(getDocs(query(collection(db, "enquiries"), limit(100))));
+      await assertFails(
+        updateDoc(doc(db, "enquiries", "test-enquiry"), {
+          status: "closed",
+          updatedAt: serverTimestamp(),
+        }),
+      );
+      await assertFails(deleteDoc(doc(db, "enquiries", "test-enquiry")));
+    }
+    await assertSucceeds(getDocs(query(collection(admin(), "enquiries"), limit(100))));
+  });
+
+  it("allows only the approved Google admin to update status and private notes", async () => {
+    await seedEnquiry();
+    const target = doc(admin(), "enquiries", "test-enquiry");
+    await assertSucceeds(
+      updateDoc(target, {
+        status: "contacted",
+        notes: "Discussed the application and agreed a follow-up call.",
+        updatedAt: serverTimestamp(),
+      }),
+    );
+    await assertSucceeds(updateDoc(target, { status: "closed", updatedAt: serverTimestamp() }));
+    await assertFails(deleteDoc(target));
+  });
+
+  it("preserves original submissions and rejects invalid admin changes", async () => {
+    await seedEnquiry();
+    const target = doc(admin(), "enquiries", "test-enquiry");
+    for (const change of [
+      { name: "Changed name" },
+      { email: "changed@example.com" },
+      { phone: "+91 1234567890" },
+      { service: "Visit visa" },
+      { country: "Ireland" },
+      { message: "Changed original visitor request." },
+      { consent: false },
+      { sourcePath: "/study-abroad" },
+      { createdAt: serverTimestamp() },
+      { status: "deleted" },
+      { notes: "A".repeat(2001) },
+      { extraField: true },
+    ])
+      await assertFails(updateDoc(target, { ...change, updatedAt: serverTimestamp() }));
+    await assertFails(
+      updateDoc(target, { status: "contacted", updatedAt: Timestamp.fromMillis(1) }),
+    );
+  });
+
+  it.each([
+    { name: "A" },
+    { name: " ".repeat(10) },
+    { name: "  Asha Rao  " },
+    { name: "A".repeat(101) },
+    { email: "invalid-email" },
+    { email: `${"a".repeat(245)}@example.com` },
+    { phone: "123456" },
+    { phone: "+91CALLNOW" },
+    { phone: "1".repeat(16) },
+    { phone: `${"(".repeat(20)}12345678901` },
+    { message: "Too short" },
+    { message: " ".repeat(20) },
+    { message: "A".repeat(2001) },
+    { service: "Unsupported service" },
+    { country: "Unsupported country" },
+    { sourcePath: "/admin" },
+    { consent: false },
+    { consent: "true" },
+    { status: "contacted" },
+    { notes: "Injected admin note" },
+    { extraField: "Injected" },
+    { createdAt: Timestamp.fromMillis(1) },
+    { updatedAt: Timestamp.fromMillis(1) },
+  ])("rejects invalid, privileged or backdated public submissions %j", async (invalid) => {
+    const db = environment.unauthenticatedContext().firestore();
+    await assertFails(
+      setDoc(doc(db, "enquiries", "invalid-enquiry"), {
+        ...publicEnquiry(),
+        ...invalid,
+      }),
+    );
+  });
+
+  it("requires the complete submission shape", async () => {
+    const db = environment.unauthenticatedContext().firestore();
+    for (const omitted of ["consent", "sourcePath", "status", "notes", "createdAt", "updatedAt"]) {
+      const incomplete: Record<string, unknown> = publicEnquiry();
+      delete incomplete[omitted];
+      await assertFails(setDoc(doc(db, "enquiries", "invalid-enquiry"), incomplete));
+    }
   });
 });

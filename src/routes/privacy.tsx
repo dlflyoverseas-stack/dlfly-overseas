@@ -27,6 +27,19 @@ function PrivacyPage() {
             choose to share through those services is used to respond to your enquiry. This website
             does not ask you to upload passport, financial or application documents.
           </p>
+          <h2>Website enquiry form</h2>
+          <p>
+            The enquiry form asks for your name, email, phone number, service interest, preferred
+            destination and message. With your agreement, we store these details in Google Firebase
+            to respond to your enquiry. Submissions and follow-up notes are accessible only through
+            the company’s restricted admin account. Please leave out sensitive documents and
+            identification or financial details. Contact our team if you want your enquiry removed.
+          </p>
+          <p>
+            Form fields are masked for Microsoft Clarity. If you allow analytics, a successful
+            submission sends a completion event and the public page path. Your name, contact
+            details, destination and message are not included in this analytics event.
+          </p>
           <h2>Optional website analytics</h2>
           <p>
             When configured, Google Analytics 4 and Microsoft Clarity help us understand how

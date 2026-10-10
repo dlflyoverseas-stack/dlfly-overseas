@@ -26,6 +26,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { SiteBrand } from "./site-brand";
 import { FloatingContact } from "./floating-contact";
 import { ContactLocation } from "./contact-location";
+import { ContactEnquirySection } from "./contact-form";
 import { ServiceProcess } from "./service-process";
 import { StudyDestinations } from "./study-destinations";
 import { Reveal } from "./reveal";
@@ -506,6 +507,14 @@ export const serviceContent = {
 } as const;
 
 type ServiceKey = keyof typeof serviceContent;
+const enquiryService = {
+  study: "Study abroad",
+  visa: "Visa guidance",
+  visit: "Visit visa",
+  dependent: "Dependent visa",
+  residency: "Permanent residency",
+  loans: "Education finance",
+} as const;
 
 export function ServicePage({ service }: { service: ServiceKey }) {
   const item = serviceContent[service];
@@ -555,8 +564,8 @@ export function ServicePage({ service }: { service: ServiceKey }) {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild className="min-h-11 rounded-full px-5">
-                <a href={whatsappLink} target="_blank" rel="noreferrer">
-                  Talk to an advisor <ArrowUpRight />
+                <a href="#contact-form">
+                  Enquire with our team <ArrowUpRight />
                 </a>
               </Button>
               <Button asChild variant="outline" className="min-h-11 rounded-full px-5">
@@ -577,6 +586,7 @@ export function ServicePage({ service }: { service: ServiceKey }) {
             ["Process", "service-process"],
             ["Checklist", "service-checklist"],
             ["FAQs", "service-faqs"],
+            ["Enquire", "contact-form"],
           ].map(([label, id]) => (
             <a
               key={id}
@@ -653,6 +663,7 @@ export function ServicePage({ service }: { service: ServiceKey }) {
           immigration advice.
         </p>
       )}
+      <ContactEnquirySection initialService={enquiryService[service]} />
       <ContactStrip />
     </>
   );
@@ -694,87 +705,7 @@ export function ContactPage() {
         image={visaImage}
         imageAlt="Student and advisor discussing overseas study plans"
       />
-      <section>
-        <div className="grid bg-card lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative min-h-[300px] bg-secondary">
-            <img
-              src={studyImage}
-              alt="Students beginning their international university journey"
-              width={1536}
-              height={1024}
-              loading="lazy"
-              className="absolute inset-0 size-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-            <div className="absolute bottom-0 p-6 text-white sm:p-8">
-              <p className="text-xs font-bold uppercase tracking-widest">
-                Big dreams. Thoughtful guidance.
-              </p>
-              <h2 className="mt-3 font-display text-3xl font-extrabold">
-                Let’s find your way forward.
-              </h2>
-              <p className="mt-3 max-w-sm text-sm leading-6 text-white/85">
-                Course choices, documents, budgets and timelines — bring your questions, and we’ll
-                work through them together.
-              </p>
-            </div>
-          </div>
-          <div className="brand-dark p-6 sm:p-8 lg:p-10">
-            <SectionLabel>Connect with an advisor</SectionLabel>
-            <h2 className="font-display text-2xl font-extrabold sm:text-3xl">
-              What would you like to explore?
-            </h2>
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              {serviceLinks.map(({ to, title, icon: Icon }) => (
-                <Link
-                  key={to}
-                  to={to}
-                  className="flex items-center gap-3 rounded-xl border border-border p-3 text-sm font-semibold transition-colors hover:border-primary hover:bg-secondary"
-                >
-                  <Icon className="size-5 shrink-0 text-primary" />
-                  {title}
-                </Link>
-              ))}
-            </div>
-            <p className="mt-5 text-sm leading-7 text-muted-foreground">
-              Share your preferred destination, course or travel goal. Our team will help you
-              identify the information to gather and the next steps to consider.
-            </p>
-            <div className="mt-6 grid gap-3">
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noreferrer"
-                className="flex min-h-12 items-center justify-between gap-3 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground"
-              >
-                <span className="flex items-center gap-3">
-                  <MessageCircle className="size-5" />
-                  Start a WhatsApp conversation
-                </span>
-                <ArrowUpRight className="size-5" />
-              </a>
-              <a
-                href={telephoneLink}
-                className="flex min-h-12 items-center gap-3 rounded-full border border-border px-5 py-3 text-sm font-semibold"
-              >
-                <Phone className="size-5 text-primary" />
-                {phoneNumber}
-              </a>
-              <a
-                href="mailto:dlflyoverseas@gmail.com"
-                className="flex min-h-12 items-center gap-3 rounded-full border border-border px-5 py-3 text-sm font-semibold"
-              >
-                <Mail className="size-5 shrink-0 text-primary" />
-                <span className="break-all">dlflyoverseas@gmail.com</span>
-              </a>
-            </div>
-            <p className="mt-5 text-xs leading-6 text-muted-foreground">
-              Start with your goals and questions. Please avoid sending sensitive documents until
-              your advisor explains the appropriate process.
-            </p>
-          </div>
-        </div>
-      </section>
+      <ContactEnquirySection showImage />
       <ContactLocation />
       <ContactStrip />
     </>
@@ -1185,6 +1116,7 @@ export function HomePage() {
           </div>
         </div>
       </Reveal>
+      <ContactEnquirySection />
       <ContactStrip />
     </>
   );
